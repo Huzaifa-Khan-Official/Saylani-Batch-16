@@ -1,0 +1,125 @@
+
+/* @font-face {
+    font-family: "My Font";
+    src: url("./");
+} */
+
+/* p {
+    text-indent: 20px;
+} */
+
+/* p::first-letter {
+    font-size: 40px;
+    font-weight: bolder;
+    color: blue;
+} */
+
+/* p::first-line {
+    font-size: 40px;
+    font-weight: bold;
+    color: blue;
+} */
+
+/* h1 {
+    text-shadow: 2px 2px 2px gray;
+} */
+
+a {
+    text-decoration: none;
+}
+
+/* a:link {
+    color: aqua;
+} */
+
+/* a:visited {
+    text-decoration: underline;
+    color: blue;
+} */
+
+/* a:hover {
+    text-decoration: underline;
+    color: pink;
+} */
+
+/* a:active {
+    color: cadetblue;
+} */
+
+/* input:hover {
+    background-color: bisque;
+} */
+
+/* input:active {
+    background-color: aquamarine;
+}
+
+input:focus {
+    background-color: brown;
+} */
+
+/* p[class = "def"] {
+    background-color: cornflowerblue;
+} */
+
+/* p.abc {
+    background-color: burlywood;
+}
+
+p.def {
+    font-weight: bolder;
+} */
+
+/* p.box {
+    font-weight: bolder;
+}
+
+p.even {
+    background-color: burlywood;
+}
+
+p.odd {
+    background-color: cornflowerblue;
+} */
+
+/* 
+p {
+    font-family: "My Font";
+} */
+
+/* body {
+    overflow: hidden;
+} */
+
+/* p {
+    width: 50%;
+
+    min-width: 200px;
+    max-width: 500px;
+    height: 200px;
+    background-color: cadetblue;
+    overflow: auto;
+    overflow-x: visible;
+} */
+
+p {
+    /* border-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 20px;
+    border-right-width: 20px;
+
+    border-width: 4px 20px 4px 20px;
+    border-width: 4px 20px;
+    border-width: 4px;
+
+    border-style: solid;
+    border-color: brown;
+    border-top-color: brown;
+    border-bottom-color: brown;
+    border-left-color: cadetblue;
+    border-right-color: blueviolet; */
+
+
+    border: 4px dashed blueviolet;
+}

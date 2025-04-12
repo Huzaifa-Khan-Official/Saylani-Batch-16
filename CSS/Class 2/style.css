@@ -1,0 +1,53 @@
+@font-face {
+    font-family: "MyFont";
+    src: url("./static/NotoSansJP-Regular.ttf");
+}
+
+/* h1 { */
+    /* background-color: rgb(255, 255, 0); */
+    /* r: red 0
+        g: green : 0
+        b: blue */
+        /* background-color: #00ffff; */
+        /* background-color: rgb(0, 255, 255); */
+        /* background-color: #037ffc; */
+        /* background-color: #fff; */
+        /* color: burlywood; */
+        /* color: hsl(0, 100%, 100); */
+        /* 
+            h: hue
+            s: saturation
+            l: lightness 
+        */
+
+        /* background-color: blue; */
+        /* opacity: 1.6; */
+
+        /* background-color: #0000ff99; */
+/* } */
+
+/* p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+} */
+
+/* p { */
+    /* font-family: "MyFont"; */
+    /* font-family: "Playwrite MX Guides", cursive; */
+    /* font-size: xx-large; */
+    /* font-size: 100%; */
+    /* font-size: 32px; */
+    /* font-weight: inherit; */
+    /* font-style: italic; */
+    /* text-transform: uppercase; */
+    /* text-decoration: ; */
+    /* line-height: 80px; */
+    /* letter-spacing: 20px; */
+    /* word-spacing: 20px; */
+    /* text-align: ; */
+/* } */
+
+a {
+    /* text-decoration: overline; */
+    text-align: center;
+}
+

@@ -1,0 +1,70 @@
+
+/* Universal Selector */
+/* * {
+    background-color: blue;
+} */
+
+/* .evenDiv {
+    background-color: aqua;
+} */
+
+/* Type Selector */
+/* p, h1, li, a, span {
+    background-color: aquamarine;
+} */
+
+/* Class Selector */
+/* .evenDiv {
+    background-color: cadetblue;
+} */
+
+/* ID Selector */
+/* #abcPara {
+    background-color: aqua;
+} */
+
+/* Child Selector */
+/* li>a {
+    background-color: aqua;
+} */
+
+/* Descendant Selector */
+/* p a {
+    background-color: beige;
+} */
+
+/* .pageDiv a {
+    background-color: beige;
+} */
+
+
+
+/* Adjacent Sibling Selector */
+/* h1+p {
+    background-color: blanchedalmond;
+} */
+
+/* General Sibling Selector */
+/* h1~p {
+    background-color: blanchedalmond;
+}
+
+#specificPara {
+    background-color: aqua;
+}
+
+div+p {
+    background-color: blue;
+}
+
+.group {
+    background-color: brown;
+} */
+
+.mainDiv {
+    font-family: 'Courier New';
+}
+
+#specificPara {
+    font-family: inherit;
+}
