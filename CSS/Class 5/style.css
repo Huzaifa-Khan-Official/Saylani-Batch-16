@@ -1,0 +1,96 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Playwrite+RO:wght@100..400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    border: 4px double black;
+    margin: 4px;
+}
+
+.headingDiv h1 {
+    text-align: center;
+    font-weight: normal;
+    line-height: 30px;
+    text-transform: uppercase;
+}
+
+#h1Stlye {
+    font-family: "Playwrite RO", cursive;
+    font-weight: bolder;
+}
+
+#specialHeading {
+    letter-spacing: 8px;
+}
+
+.navDiv ul {
+    text-align: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    width: fit-content;
+    margin: 30px auto 10px auto;
+}
+
+.navDiv ul li {
+    display: inline-block;
+    padding: 6px 10px;
+}
+
+.imagesDiv {
+    text-align: center;
+}
+
+.imagesDiv img {
+    margin-left: -4px;
+    width: 200px;
+}
+
+.paraDiv {
+    width: 60%;
+    margin: 20px auto;
+} */
+
+/* .mainDiv ol {
+    list-style-type: lower-roman;
+    list-style-position: inside;
+    list-style: lower-greek inside;
+    list-style: inside lower-latin;
+} */
+
+.mainDiv table {
+    width: 90%;
+    background-color: darkseagreen;
+    color: white;
+    /* border-spacing: 10px; */
+    border-collapse: separate;
+    margin: 0 auto;
+}
+
+.mainDiv table, .mainDiv td, .mainDiv th {
+    border: 1px solid gray;
+}
+
+.mainDiv td {
+    text-align: center;
+    letter-spacing: 2px;
+    padding: 4px 8px;
+}
+
+.mainDiv .evenRow {
+    background-color: darkcyan;
+}
+
+#headingRow {
+    background-color: goldenrod;
+}
+
+.mainDiv td:hover, .mainDiv th:hover {
+    background-color: cadetblue;
+    color: gold;
+    cursor: pointer;
+    transform: scale(1.09);
+    transition: 1s;
+}
