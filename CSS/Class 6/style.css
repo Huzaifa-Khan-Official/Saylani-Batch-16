@@ -1,0 +1,154 @@
+/* body {
+    background-color: rgba(0, 0, 255, 0.45);
+}
+
+table {
+    background-color: white;
+    border-radius: 10px;
+    margin: 100px auto;
+    width: 80%;
+    border-collapse: collapse;
+}
+
+#headingRow {
+    background-color: black;
+    color: white;
+}
+
+
+
+td, th {
+    padding: 6px 8px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.205);
+}
+
+th {
+    border: 1px solid gray;
+}
+
+.evenRow {
+    background-color: lightgray;
+}
+
+.editIcon {
+    color: green;
+}
+
+.deleteIcon {
+    color: red;
+}
+
+tr:hover {
+    background-color: darkgray;
+    transition: 0.3s;
+    cursor: pointer;
+} */
+
+/* div {
+    margin: 8px 0;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+}
+
+#passwordField {
+    background-image: url("./assets/eye.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 20px;
+    width: 190px;
+
+}
+
+input {
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    width: 200px;
+    padding: 6px 8px;
+} */
+
+/* body {
+    background-color: gray;
+}
+
+.black {
+    background-color: black;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+.white {
+    background-color: white;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+#whiteKing {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 425px;
+    right: 150px;
+    position: relative;
+    top: -100px;
+    bottom: 100px;
+}
+
+#whiteKing {
+    position: static;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: darkkhaki;
+}
+
+/* ul {
+    position: sticky;
+    top: 0;
+    background-color: rgba(211, 211, 211, 0.7);
+} */
+
+/* ul {
+    position: fixed;
+    top: 0;
+    background-color: rgba(211, 211, 211, 0.789);
+    left: 20px;
+} */
+
+.mainDiv {
+    padding: 20px;
+}
+
+/* ul {
+    top: 0;
+} */
+
+#navDiv {
+    /* width: 100vw */
+    position: sticky;
+    top: 0;
+
+}
+
+ul > li {
+    display: inline-block;
+    width: 200px;
+    background-color: pink;
+}
+
+#goToTop {
+    position: fixed;
+    right: 20px;
+    bottom: 0;
+}
