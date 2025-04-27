@@ -1,0 +1,53 @@
+/* @import url("./index.css"); */
+@import url(./index.css);
+
+/* .box {
+    width: 100px;
+    height: 100px;
+}
+
+body {
+    background-color: lightgray;
+} */
+
+/* #img1 {
+    width: 500px;
+    height: 400px;
+    display: block;
+} */
+
+/* body {
+    background-image: url("./assets/bgImage.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    background-attachment: fixed;
+    background-position: center;
+} */
+
+/* body {
+    background: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+} */
+
+#img2,
+#img3 {
+    margin-left: -10px;
+}
+
+.fa-magnifying-glass {
+    color: goldenrod;
+}
+
+.card {
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+    transition: 0.3s;
+    width: 40%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
