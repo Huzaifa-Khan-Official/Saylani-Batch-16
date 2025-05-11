@@ -1,0 +1,366 @@
+@font-face {
+    font-family: "AudiType";
+    src: url("./assets/AudiTypeVF.woff2");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.hamBurgerDiv {
+    display: none;
+}
+
+.leftSide {
+    display: flex;
+    gap: 20px;
+}
+
+.navItems ul {
+    display: flex;
+    list-style-type: none;
+    gap: 0 20px;
+    color: gray;
+}
+
+.iconDiv img {
+    width: 50px;
+}
+
+.heroSection {
+    min-height: 800px;
+    position: relative;
+}
+
+.imgDiv img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.contentSection {
+    color: white;
+    position: absolute;
+    bottom: 100px;
+    left: 150px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.headingDiv h2 {
+    font-family: "AudiType", sans-serif;
+    font-size: 44px;
+}
+
+.paraDiv p {
+    font-family: "AudiType", sans-serif;
+    font-size: 28px;
+}
+
+.btnDiv button,
+.contentBtn {
+    background-color: white;
+    color: black;
+    padding: 14px 30px;
+    font-size: 22px;
+    width: fit-content;
+}
+
+.btnDiv button:hover,
+.contentBtn:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all .8s;
+}
+
+.cardsSectioon {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.cardDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.headingCardDiv h2 {
+    font-family: "AudiType", sans-serif;
+    font-size: 44px;
+    text-align: center;
+}
+
+.cardsMainDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.cardImg img {
+    width: 100%;
+}
+
+.cardContentDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cardHeading h3 {
+    font-family: "AudiType", sans-serif;
+    font-size: 30px;
+}
+
+.cardPara p {
+    color: rgb(74, 74, 74);
+    font-size: 20px;
+}
+
+.cardLink a {
+    color: black;
+    text-decoration: underline;
+}
+
+.cardLink:hover {
+    cursor: pointer;
+}
+
+.cardLink:hover .fa-greater-than {
+    transform: translateX(10px);
+    transition: all .5s;
+}
+
+.cardLink {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.infoSection {
+    display: flex;
+    gap: 30px;
+    padding: 80px 60px;
+}
+
+.infoSection div {
+    width: 50%;
+}
+
+.infoSection img {
+    width: 100%;
+}
+
+.contentLeftDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    padding-left: 50px;
+}
+
+.contentLeftDiv h3 {
+    font-size: 34px;
+    font-family: "AudiType", sans-serif;
+    font-weight: lighter;
+}
+
+.contentLeftDiv p {
+    color: rgb(91, 91, 91);
+}
+
+.contentRightDiv img {
+    max-width: 1000px;
+}
+
+.footerSection {
+    padding: 80px 60px;
+    /* height: 600px; */
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-bottom: 500px;
+}
+
+.backToTopDiv {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+.backToTopDiv:hover {
+    cursor: pointer;
+}
+
+.anchorDiv a {
+    padding-right: 10px;
+}
+
+.anchorDiv:hover .fa-angle-up {
+    transform: translateY(-4px);
+}
+
+.backToTopDiv a {
+    color: white;
+}
+
+.listItemDiv {
+    display: flex;
+    gap: 200px;
+    padding-left: 100px;
+}
+
+.listItemDiv h3 {
+    font-size: 26px;
+}
+
+.listItemDiv div {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.listItemDiv ul,
+.leftSection ul {
+    list-style-type: none;
+}
+
+.listItemDiv li {
+    padding: 16px 0;
+}
+
+.copyrightSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftSection ul {
+    display: flex;
+    gap: 20px;
+}
+
+.socialIconsDiv {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+    border-bottom: 1px solid white;
+    padding-bottom: 20px;
+}
+
+.rightSection {
+    display: flex;
+    gap: 14px;
+}
+
+.footerEnd p {
+    font-size: 14px;
+}
+
+@media (min-width:769px) and (max-width: 1024px) {
+    .cardsMainDiv {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 40px;
+    }
+
+    .contentLeftDiv {
+        padding-left: 10px;
+    }
+
+    .listItemDiv {
+        padding-left: 0;
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+
+    .copyrightSection {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .leftSection ul {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .navItems,
+    .fa-magnifying-glass {
+        display: none;
+    }
+
+    .hamBurgerDiv {
+        display: block;
+    }
+
+    .contentSection {
+        left: 40px;
+    }
+
+    .cardsMainDiv {
+        grid-template-columns: 1fr;
+        row-gap: 40px;
+    }
+
+    .infoSection {
+        flex-direction: column;
+        padding-top: 20px;
+    }
+
+    .contentLeftDiv {
+        padding-left: 0;
+    }
+
+    .infoSection div {
+        width: 100%;
+    }
+
+    .listItemDiv {
+        padding-left: 0;
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+
+    .copyrightSection {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .leftSection ul {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 468px) {
+    .cardsSectioon {
+        padding: 80px 20px;
+    }
+
+    .infoSection {
+        padding: 20px;
+    }
+
+    .headingDiv h2 {
+        font-size: 32px;
+    }    
+}
+
+@media (max-width:350px) {
+    .contentSection {
+        left: 10px;
+    }
+}
