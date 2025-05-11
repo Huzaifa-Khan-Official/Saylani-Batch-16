@@ -187,13 +187,12 @@
 
 .footerSection {
     padding: 80px 60px;
-    /* height: 600px; */
+    margin-top: 60px;
     background-color: black;
     color: white;
     display: flex;
     flex-direction: column;
     gap: 60px;
-    margin-bottom: 500px;
 }
 
 .backToTopDiv {
@@ -337,7 +336,7 @@
 
     .copyrightSection {
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 20px;
     }
 
     .leftSection ul {
@@ -352,6 +351,18 @@
 
     .infoSection {
         padding: 20px;
+    }
+
+    .footerSection {
+        padding-left: 20px;
+    }
+
+    .backToTopDiv {
+        justify-content: start;
+    }
+
+    .footerSection, .listItemDiv, .listItemDiv div {
+        gap: 30px;
     }
 
     .headingDiv h2 {
