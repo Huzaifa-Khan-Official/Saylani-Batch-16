@@ -1,0 +1,29 @@
+/* .main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.even {
+    background-color: burlywood;
+}
+
+.odd {
+    background-color: cadetblue;
+} */
+
+.myNav {
+    padding: 0 80px;
+}
+
+.primaryBtn {
+    background-color: cadetblue;
+}

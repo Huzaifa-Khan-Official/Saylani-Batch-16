@@ -1,0 +1,68 @@
+/* @font-face {
+    font-family: "FontFamily";
+    src: url(./);
+} */
+
+/* li > a {
+    color: brown;
+} */
+
+
+/* div > p {
+    color: brown;
+} */
+
+/* h1 ~ p {
+    color: brown;
+} */
+/* 
+a {
+    color: inherit;
+} */
+
+/* 
+
+which of the following text transform property is correct?
+1) text-transform: bold
+1) text-transform: italic
+1) text-transform: uppercase
+1) text-transform: underline
+ */
+
+/* p {
+    text-align: justify;
+} */
+
+/* p {
+    text-shadow: 8px 2px 6px gray;
+    text-shadow: 8px 2px gray;
+} */
+
+/* ::first-letter 
+1) pseudo-elements.
+2) pseudo-class. */
+
+.main {
+    height: 500px;
+    background-color: bisque;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+}
+
+.blue {
+    background-color: blue;
+    /* float: left; */
+    clear: right;
+}
+
+.red {
+    background-color: red;
+    float: right;
+}
+
+.brown {
+    background-color: brown;
+}
