@@ -1,0 +1,26 @@
+.cardImg {
+    height: 300px;
+    object-fit: contain;
+}
+
+.imgLabel {
+    bottom: 7px;
+    left: 20px;
+}
+
+
+.box {
+    height: 100px;
+}
+
+.even {
+    background-color: burlywood;
+}
+
+.odd {
+    background-color: cadetblue;
+}
+
+.col img  {
+    width: 100%;
+}
