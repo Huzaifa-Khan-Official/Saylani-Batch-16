@@ -21,6 +21,52 @@
     background-color: cadetblue;
 }
 
-.col img  {
+.col img {
     width: 100%;
+}
+
+.firstDiv {
+    background-color: wheat;
+}
+
+.secondDiv {
+    background-color: rgb(166, 140, 92);
+    height: 200px;
+}
+
+.thirdDiv {
+    background-color: cadetblue;
+}
+
+.fourthDiv {
+    background-color: burlywood;
+    height: 200px;
+}
+
+.fifthDiv {
+    background-color: crimson;
+}
+
+.sixthDiv {
+    background-color: darkcyan;
+    height: 90px
+}
+
+.seventhDiv {
+    background-color: chocolate;
+    height: 86px
+}
+
+.eighthDiv {
+    background-color: brown;
+}
+
+.ninthDiv {
+    background-color: coral;
+}
+
+.textCener {
+    display: flex;
+    justify-content: center;
+    justify-content: center;
 }
