@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-brand {
+    padding-left: 150px;
+}
+
+.nav-item .nav-link {
+    text-transform: uppercase;
+}
+
+.navSearchDiv {
+    background-color: red;
+    padding: 30px;
+}
+
+.nav-link.active {
+    color: red !important;
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
+
+.carousel-indicators button {
+    background-color: transparent !important;
+    border: 1px solid black !important;
+    border-radius: 50%;
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.carousel-indicators button.active {
+    background-color: red !important;
+}
+
+@media (max-width: 992px) {
+    .navbar-brand {
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        padding-left: 0;
+    }
+}
+
+
+.iconDiv {
+    padding: 20px;
+    background-color: black;
+    color: white;
+    width: 60px;
+    text-align: center;
+    height: 100%;
+}
