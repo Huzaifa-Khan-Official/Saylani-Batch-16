@@ -1,0 +1,91 @@
+:root {
+    /* --color-primary: #295FB7; */
+    --color-primary: pink;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navLogo img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.navLogo h2 {
+    color: var(--color-primary);
+}
+
+.navListItems ul {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.navBtnsDiv button {
+    border: none;
+    background-color: transparent;
+    padding: 8px 12px;
+}
+
+#signin {
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.heroSection {
+    background-image: url("./assets/Image_Hero.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-color: var(--color-primary);
+    padding: 80px 0;
+    color: white;
+}
+
+.contentDiv {
+    margin: 80px 0;
+    width: 70%;
+}
+
+.heroCardsDiv {
+    background-color: white;
+    color: black;
+    padding: 20px 30px;
+}
+
+.servicesSection {
+    background-color: #ECF4FD;
+}
+
+.servicesContentDiv h2 {
+    color: var(--color-primary);
+}
+
+.card.active {
+    background-color: var(--color-primary);
+}
+
+.cardsIconDiv {
+   padding: 10px;
+   border-radius: 50%;
+}
+
+.cardIconDiv i {
+    font-size: 42px;
+    background-color: var(--color-primary);
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.card.active .cardIconDiv i {
+    background-color: white;
+    color: black;
+}
+
+.cardContentDiv h3, .cardContentDiv p, .cardIconDiv {
+    text-align: center;
+}
