@@ -1,6 +1,9 @@
 :root {
-    /* --color-primary: #295FB7; */
-    --color-primary: pink;
+    --color-primary: #295FB7;
+    --primary-light: #ECF4FD;
+    --text-white: white;
+    --text-dark: black;
+    /* --color-primary: pink; */
 }
 
 * {
@@ -24,15 +27,17 @@
     padding-left: 0;
 }
 
-.navBtnsDiv button {
+.navBtnsDiv button,
+.featureContentDiv button {
     border: none;
     background-color: transparent;
     padding: 8px 12px;
 }
 
-#signin {
+#signin,
+.featureContentDiv button {
     background-color: var(--color-primary);
-    color: white;
+    color: var(--text-white);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
@@ -43,7 +48,7 @@
     background-position: right top;
     background-color: var(--color-primary);
     padding: 80px 0;
-    color: white;
+    color: var(--text-white);
 }
 
 .contentDiv {
@@ -52,17 +57,30 @@
 }
 
 .heroCardsDiv {
-    background-color: white;
-    color: black;
+    background-color: var(--text-white);
+    color: var(--text-dark);
     padding: 20px 30px;
 }
 
-.servicesSection {
-    background-color: #ECF4FD;
+.servicesSection,
+.featureSection {
+    background-color: var(--primary-light);
 }
 
-.servicesContentDiv h2 {
+.servicesContentDiv h2,
+.collectionContentDiv h2,
+.featureContentDiv h2 {
     color: var(--color-primary);
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+.servicesCardSection .card.active .cardContentDiv {
+    color: var(--text-white);
+}
+
+.servicesCardSection .card.active .cardContentDiv h3 {
+    color: var(--text-white);
 }
 
 .card.active {
@@ -70,22 +88,104 @@
 }
 
 .cardsIconDiv {
-   padding: 10px;
-   border-radius: 50%;
+    padding: 10px;
+    border-radius: 50%;
 }
 
 .cardIconDiv i {
     font-size: 42px;
     background-color: var(--color-primary);
+    color: var(--text-white);
     padding: 20px;
     border-radius: 50%;
 }
 
 .card.active .cardIconDiv i {
-    background-color: white;
-    color: black;
+    background-color: var(--text-white);
+    color: var(--text-dark);
 }
 
-.cardContentDiv h3, .cardContentDiv p, .cardIconDiv {
+.cardContentDiv h3,
+.cardContentDiv p,
+.cardIconDiv {
     text-align: center;
+}
+
+.cardContentDiv h3 {
+    color: var(--color-primary);
+}
+
+.servicesCardSection .card {
+    flex: 1 1 200px;
+    min-width: 200px;
+}
+
+.featureCardDiv:hover .featureContentDiv {
+    animation: fadeInBottom 0.9s linear 0s 1 normal forwards;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.329);
+    color: var(--text-white);
+}
+
+@keyframes fadeInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contactSection {
+    background-image: url("./assets/r-architecture-KQPEhYweLrQ-unsplash\ 2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.backdropDiv {
+    background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+.contactSection .row {
+    color: var(--text-white);
+}
+
+.headingDiv h2 {
+    font-size: 42px;
+    font-weight: bolder;
+}
+
+.contactInfoDiv h6, .socialInfoDiv h6 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.contactInfoDiv ul,  .socialInfoDiv ul {
+    list-style-type: none;
+}
+
+.contactInfoDiv li,  .socialInfoDiv li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.contactInfoDiv li p,  .socialInfoDiv li p {
+    margin: 0;
+}
+
+.formDiv {
+    background-color: white;
+}
+
+.formDiv h2 {
+    color: var(--color-primary);
 }
