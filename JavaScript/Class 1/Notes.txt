@@ -1,0 +1,46 @@
+High-Level-Programming-Languages: Python, JavaScript, Java, C#, PHP, Laravel, swift, kotlin, go, etc. (Human - Computer)
+
+Assebmly-Language/Middle-Level-Lang
+
+Binary-Language/Low-Level-Lang: 0, 1 (Computer)
+
+
+JS Instruction ==> Translator(Compiler (150 lines at the moment)/Interpreter (line by line (left to right) ) ) ==> Binary ==> Computer
+
+syntax ==> Grammer of a language
+
+
+() ==> a function
+2 Types function ==> 1) Predefined/BuiltIn Fuctions 2) User Defined Function
+
+
+Anything inside of qutation (Single/Double) is called string
+
+
+Variable Definition Rules:
+1) var can be start with an english character: a, b, abc, fullName, (Allowed)
+2) var can not be start with a number: 123, 1ab, 4FullName (Not Allowed)
+3) number can be used inbetween or ending of a variable: full1Name, fullName1 (Allowed)
+4) space is not allowed inbetween of a variable: full Name, a b c (Not Allowed)
+5) Special characters is not allowed inbtween, ending or a start of a variable: #FullName, First@Name, LastName& (Not Allowed)
+6) Only $, _ special characters are allowed inbtween, starting or ending of a variable: _FullName, First$Name, LastName_ (Allowed).
+7) reserved words are not allowed: JavaScript words are not allowed: var, alert (Not Allowed)
+
+JavaScript is a case sensitive language (Alert is not equal to alert, ABC is not equal to abc)
+
+Data Types
+1) string " sdfdsfsdfsdf  "
+2) Number: 
+	1) Integer: 789, 1, 2
+	2) Float: 756.9, 2.5, 1.0
+3) Boolean:
+	1) true
+	2) false
+
+typeof() ==> gives you the type of a variable
+
+
+
+
+
+
