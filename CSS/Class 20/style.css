@@ -1,0 +1,50 @@
+:root {
+  --blackColor: black;
+  --whiteColor: white;
+  --primary: #043873;
+  --primaryLight: #4F9CF9;
+  --secondary: #FFE492;
+  --btnPadding: 6px 16px;
+  --sectionPadding: 40px 10px;
+}
+
+.navbar, .heroSection {
+  background-color: var(--primary) !important;
+}
+
+.myBtn, .heroSection {
+  color: var(--whiteColor);
+}
+
+.textBlack {
+  color: var(--blackColor);
+}
+
+.myBtn {
+  padding: var(--btnPadding) !important;
+  border-radius: 6px;
+  width: fit-content;
+  border: none;
+}
+
+.loginBtn {
+  background-color: var(--secondary) !important;
+}
+
+.dummyBg, .myBtn {
+  background-color: var(--primaryLight);
+}
+
+.dummyBg {
+  height: 400px;
+}
+
+section {
+  padding: var(--sectionPadding);
+}
+
+/* @media (max-width: 768px) {
+  .heroSection .row {
+    gap: 20px;
+  }
+} */
