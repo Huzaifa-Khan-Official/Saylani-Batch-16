@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="calculator">
+    <input type="text" id="input" readonly>
+    <div id="mainGrid">
+
+      <div onclick="clearBtn()" id="clearButton">C</div>
+      <div onclick="delBtn()">DEL</div>
+      <div onclick="concatinate('%')">%</div>
+      <div onclick="concatinate('/')">/</div>
+
+
+      <div onclick="concatinate('7')">7</div>
+      <div onclick="concatinate('8')">8</div>
+      <div onclick="concatinate('9')">9</div>
+      <div onclick="concatinate('*')">*</div>
+
+
+
+      <div onclick="concatinate('4')">4</div>
+      <div onclick="concatinate('5')">5</div>
+      <div onclick="concatinate('6')">6</div>
+      <div onclick="concatinate('-')">-</div>
+
+
+
+      <div onclick="concatinate('1')">1</div>
+      <div onclick="concatinate('2')">2</div>
+      <div onclick="concatinate('3')">3</div>
+      <div onclick="concatinate('+')">+</div>
+
+
+
+      <div onclick="concatinate('0')">0</div>
+      <div onclick="concatinate('.')">.</div>
+      <div onclick="calculate()" id="calcBtn">=</div>
+
+
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
