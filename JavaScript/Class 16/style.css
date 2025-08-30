@@ -1,0 +1,15 @@
+.paraStyling {
+  background-color: lightpink;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.secondParaHidden {
+  display: none;
+}
+
+.secondParaVisible {
+  display: block;
+}
+
+/* #input:foc */
