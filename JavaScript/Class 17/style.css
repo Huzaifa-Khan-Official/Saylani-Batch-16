@@ -1,0 +1,14 @@
+.imageAnimate {
+  transform: scale(1.5);
+  transition: all 1.5s;
+}
+
+.changeAnimate {
+  transform: scale(1);
+  transition: all 1.5s;
+}
+
+.outputLi {
+  display: flex;
+  justify-content: space-between;
+}
