@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
-</head><body>
+</head>
+
+<body>
   <!-- <img src="./assets/bulbOff.jpg" width="400" height="400" alt="" id="image">
   <button onclick="toggleBulb()" id="btn">On</button> -->
 
@@ -29,13 +31,15 @@
   </div> -->
 
   <input type="text" name="" id="input">
-  <button onclick="addTodo()">ADD</button>
+  <button id="addBtn" onclick="addTodo()">ADD</button>
+  <button id="editBtn" onclick="editTodoLi()">EDIT</button>
 
   <ul id="output">
 
   </ul>
 
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

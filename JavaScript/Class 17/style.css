@@ -12,3 +12,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+#editBtn {
+  display: none;
+}
