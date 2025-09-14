@@ -31,11 +31,35 @@
 // console.log("randomNumber ==>", Math.ceil(8.994263169537328));
 
 
-var x = 5; // global
-function test() {
-  var x = 10; // local
-  return x; // local 10
-}
+// var x = 5; // global
+// function test() {
+//   var x = 10; // local
+//   return x; // local 10
+// }
 
-x = test() // global 10
-console.log("result ==>", test(), x);
+// x = test() // global 10
+// console.log("result ==>", test(), x);
+
+
+// function ageCalculate() {
+//   var input = document.getElementById("userInp")
+//   var currentDate = new Date();
+//   var dob = new Date(input.value)
+//   var diff = currentDate.getTime() - dob.getTime();
+//   // return ;
+//   console.log("age ==>", Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25)));
+
+//   // return age;
+
+
+// }
+
+function ageCalculate() {
+  var input = document.getElementById("userInp");
+  console.log("input ==>", input.value);
+  var currentDate = new Date();
+  var dob = new Date(input.value);
+  var age = currentDate.getFullYear() - dob.getFullYear();
+  var output = document.getElementById("output");
+  output.innerText = "You are " + age + " years old!";
+}
