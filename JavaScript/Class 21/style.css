@@ -1,0 +1,30 @@
+/* body {
+  background-color: bisque;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+.outputDiv {
+  padding-top: 25px;
+  color: rgb(1, 94, 1);
+  font-size: 26px;
+} */
+
+.heading1 {
+  background-color: bisque;
+  text-decoration: underline;
+}
+
+.fontSize {
+  font-size: 40px;
+}
