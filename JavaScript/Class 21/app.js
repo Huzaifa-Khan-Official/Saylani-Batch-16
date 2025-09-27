@@ -49,14 +49,14 @@
 
 // console.log("students ==>", students.studen1);
 // console.log("student1 ==>", student1.age);
-// student1.class = "2nd year";
-// student1.hobbies = ["circket", "cycling", "movies", "games"];
-// student1.hobbies.push("games")
-// if (student1.age >= 18) {
-//   student1.isEligible = true
-// } else {
-//   student1.isEligible = false
-// }
+student1.class = "2nd year";
+student1.hobbies = ["circket", "cycling", "movies", "games"];
+student1.hobbies.push("games")
+if (student1.age >= 18) {
+  student1.isEligible = true
+} else {
+  student1.isEligible = false
+}
 // console.log("studen1 ==>", student1);
 // console.log("hobbies[1] ==>", student1.hobbies)
 
