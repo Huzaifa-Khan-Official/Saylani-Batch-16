@@ -7,8 +7,16 @@ function signup() {
   // var user = {};
   // user.email = emailValue;
   // user.password = passwordValue;
+  var id;
+
+  if (users.length == 0) {
+    id = 1
+  } else {
+    id = users[users.length - 1].id + 1
+  }
 
   var user = {
+    id: id,
     email: emailValue,
     password: passwordValue
   }
@@ -36,6 +44,7 @@ function login() {
     if (user.email == emailValue && user.password == passwordValue) {
       alert("User Authenticated Successfully!")
       userFound = true
+      localStorage.setItem("currentUser", JSON.stringify(user))
       location.href = "./index.html"
     }
   }
