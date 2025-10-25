@@ -9,6 +9,24 @@ function signup() {
   // user.password = passwordValue;
   var id;
 
+  // users = [
+    // {
+    // 	id: 0,
+    // 	email: 'use0@gmail.com',
+    // 	password: "123456789"
+    // },
+    // {
+    // 	id: 1,
+    // 	email: 'use1@gmail.com',
+    // 	password: "123456789"
+    // },
+    // {
+    // 	id: 2,
+    // 	email: 'use2@gmail.com',
+    // 	password: "123456789"
+    // }
+  // ]
+
   if (users.length == 0) {
     id = 1
   } else {

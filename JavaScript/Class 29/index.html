@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <main class="bg-body-secondary">
+    <div class="card mainDiv px-4">
+      <h1 class="text-center mainHeading">Expence Tracker</h1>
+      <div class="balanceDiv d-flex justify-content-center flex-column align-items-center">
+        <h3>Your Balance</h3>
+        <p id="balanceAmount">Rs. 19000</p>
+      </div>
+
+      <div class="incomeExpenseDiv d-flex px-2 gap-2">
+        <div class="incomeCard card w-50 bg-body-tertiary py-2">
+          <h4 class="text-center">Income</h4>
+          <p id="incomeAmount" class="text-center">Rs. 25000</p>
+        </div>
+        <div class="expenseCard card w-50 bg-danger-subtle py-2">
+          <h4 class="text-center">Expense</h4>
+          <p id="expenseAmount" class="text-center">Rs. 6000</p>
+        </div>
+      </div>
+      
+      <div class="my-3">
+        <button type="submit" class="btn btn-primary" id="openTransactionBtn">Add Transaction</button>
+      </div>
+
+      <div class="addTransactionDiv">
+        <h3>Add Transaction</h3>
+        <div class="addTransactionForm">
+          <div class="mb-3">
+            <label for="amountDescription" class="form-label">Description</label>
+            <input type="text" class="form-control" id="amountDescription" aria-describedby="amount-description">
+          </div>
+          <div class="mb-3">
+            <label for="amountValue" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="amountValue" aria-describedby="amount-description">
+            <div id="amountValueHelp" class="form-text">Negative - expense, positive - income</div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="addTransactionBtn">Add Transaction</button>
+        </div>
+      </div>
+
+      <div class="transactionHistoryDiv py-4">
+        <h3>Transaction History</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date</th>
+              <th scope="col">Description</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

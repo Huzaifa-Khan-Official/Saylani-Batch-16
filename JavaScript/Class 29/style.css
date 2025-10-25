@@ -1,0 +1,33 @@
+:root {
+  --primaryColor: #7f5dfc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.bg-body-secondary {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.mainDiv {
+  width: 70%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.mainHeading, #balanceAmount {
+  color: var(--primaryColor);
+}
+
+p {
+  margin: 0;
+}
+
+.addTransactionDiv {
+  display: none;
+}
