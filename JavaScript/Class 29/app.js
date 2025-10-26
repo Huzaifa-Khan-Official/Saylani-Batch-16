@@ -1,75 +1,91 @@
 // var detail = localStorage.getItem("detail") || [];
-var users = JSON.parse(localStorage.getItem("usersData")) || [];
+var currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-
-if (location.href == "./index.html") {
-  var openTransactionBtn = document.getElementById("openTransactionBtn");
-  var addTransactionDiv = document.querySelector(".addTransactionDiv");
-
-  openTransactionBtn.addEventListener("click", function () {
-    addTransactionDiv.style.display = "block";
-    openTransactionBtn.style.display = "none";
-  })
-
-  var addTransactionBtn = document.getElementById("addTransactionBtn");
-
-  addTransactionBtn.addEventListener("click", function () {
-    var amountDescription = document.getElementById("amountDescription").value;
-    var amountValue = document.getElementById("amountValue").value;
-
-    if (!amountDescription || !amountValue) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill all the fields!",
-      });
-      return;
-    }
-
-    console.log("detail ==>", detail);
-
-    addTransactionDiv.style.display = "none";
-    openTransactionBtn.style.display = "block";
-  })
+if (!currentUser) {
+  alert("Please Login first!");
+  location = "./login/login.html";
 }
 
+var openTransactionBtn = document.getElementById("openTransactionBtn");
+var addTransactionDiv = document.querySelector(".addTransactionDiv");
 
-if (location.href.includes("signup.html")) {
+openTransactionBtn.addEventListener("click", function () {
+  addTransactionDiv.style.display = "block";
+  openTransactionBtn.style.display = "none";
+})
 
-  var singupBtn = document.getElementById("singupBtn");
+var addTransactionBtn = document.getElementById("addTransactionBtn");
 
-  singupBtn.addEventListener("click", function () {
-    var emailValue = document.getElementById("semail").value;
-    var passwordValue = document.getElementById("spassword").value;
+addTransactionBtn.addEventListener("click", function () {
+  var amountDescription = document.getElementById("amountDescription").value;
+  var amountValue = document.getElementById("amountValue").value;
 
-    if (!emailValue || !passwordValue) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill all the fields!",
-      });
-      return;
+  if (!amountDescription || !amountValue) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Please fill all the fields!",
+    });
+    return;
+  }
+
+  var usersTransactionsArr = JSON.parse(localStorage.getItem("usersTransactions")) || [];
+
+  var userHistory = {
+    id: currentUser.id,
+    transactionHistoryArr: []
+  }
+
+  var transaction = {
+    description: amountDescription,
+    value: amountValue,
+    date: new Date()
+  }
+
+  userHistory.transactionHistoryArr.push(transaction);
+
+  usersTransactionsArr.push(userHistory);
+
+  console.log("usersTransactionsArr ==>", usersTransactionsArr);
+
+  localStorage.setItem("usersTransactions", JSON.stringify(usersTransactionsArr));
+
+  getTransations();
+
+  addTransactionDiv.style.display = "none";
+  openTransactionBtn.style.display = "block";
+})
+
+var tableBody = document.getElementById("tableBody");
+
+function getTransations() {
+  var usersTransactionsArr = JSON.parse(localStorage.getItem("usersTransactions")) || [];
+  tableBody.innerText = "";
+  var dataFound = false;
+  for (var index in usersTransactionsArr) {
+    if (usersTransactionsArr[index].id == currentUser.id) {
+      // console.log("data ==>", usersTransactionsArr[index]);
+      dataFound = true;
+      var transactionHistoryArr = usersTransactionsArr[index].transactionHistoryArr
+      // console.log("history ==>", transactionHistoryArr);
+      transactionHistoryArr.map(function (kuchBHI) {
+        console.log("value ==>", kuchBHI);
+        tableBody.innerHTML += `
+              <tr>
+                <th scope="row">1</th>
+                <td>${kuchBHI.date}</td>
+                <td>${kuchBHI.description}</td>
+                <td>${kuchBHI.value}</td>
+                <td>X</td>
+              </tr>
+        `
+      })
     }
+  }
 
-    var id;
-
-    if (users.length == 0) {
-      id = 1
-    } else {
-      id = users[users.length - 1].id + 1
-    }
-
-
-    var user = {
-      id: id,
-      email: emailValue,
-      password: passwordValue
-    }
-
-    console.log("users before push ==>", users);
-
-    users.push(user);
-
-    localStorage.setItem("usersData", JSON.stringify(users));
-  })
+  if (!dataFound) {
+    tableBody.innerText = "No Transactions Found!";
+  }
 }
+
+getTransations()
