@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Poppins Heading 1";
+  src: url("./Poppins/Poppins-ExtraBold.ttf");
+}
+
+h1 {
+  font-family: "Poppins Heading 1";
+}
