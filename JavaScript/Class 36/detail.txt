@@ -1,0 +1,44 @@
+1) Home page => Product Listings
+2) login, signup
+3) each dashboard:
+	1) products add
+	2) edit product
+	3) delete Product
+	4) Read Products
+4) add to cart
+
+
+AllUsers = [
+	{
+		id: "unique",
+		email: "abc@gmail.com",
+		password: "123456",
+		productsList: [
+			{
+				id: "Unique",
+				productName: "skin care",
+				productDescription: "It is the best product in the 					world",
+				productImg: "link",
+				price: "1200 Rs.",
+				category: "Skin Care"
+				rating: 4.5/5
+			}
+		]
+	}
+]
+
+addToCart = [
+	{
+		productId: "UniqueId" ==> product.id,
+		quantity: 1,
+		totalPrice: product.price * quantity,
+	},
+	{
+		productId: "UniqueId" ==> product.id,
+		quantity: 1,
+		totalPrice: product.price * quantity,
+	},
+]
+
+mainTotal = addToCart.map(product => product.totalPrice+= mainTotal )
+

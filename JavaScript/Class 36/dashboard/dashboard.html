@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+      <a class="navbar-brand" href="#">E-commerce</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+        <div>
+          <div class="dropdown dropstart userProfile">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="../assets/userIcon.avif" alt="" id="profilePicture">
+            </button>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <p id="userEmail"></p>
+              </li>
+              <li class="dropdown-item"><a href="./dashboard/dashboard.html">Dashboard</a></li>
+              <li class="dropdown-item"><button class="btn btn-danger" id="logoutBtn">Logout</button></li>
+            </ul>
+          </div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2 loginDiv">
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                data-bs-target="#singupModal">
+                Signup
+              </button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                Login
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-4">
+    <div class="d-flex justify-content-between">
+      <h1>Your Products</h1>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProduct">
+        <i class="fa-solid fa-plus text-white"></i> Add Product
+      </button>
+    </div>
+    <div id="productsDiv">
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="addProductLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addProductLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="productTitle" class="form-label">Product Title</label>
+            <input type="text" class="form-control" id="productTitle" placeholder="Product name...">
+          </div>
+          <div class="mb-3">
+            <label for="productDescription" class="form-label">Product Description</label>
+            <textarea class="form-control" id="productDescription" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="productImg" class="form-label">Product Image</label>
+            <input type="text" class="form-control" id="productImg" placeholder="Image URL">
+          </div>
+          <div class="mb-3">
+            <label for="productPrice" class="form-label">Product Pice</label>
+            <input type="number" class="form-control" id="productPrice" placeholder="25000.00">
+          </div>
+          <select class="form-select" aria-label="Select Category" id="productCategory">
+            <option selected disabled>Select Category</option>
+            <option value="Electronic Category">Electronic Categories</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Skin Care">Skin Care</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addProductBtn" >Add Product</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+
+</html>

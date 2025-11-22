@@ -1,0 +1,13 @@
+#errorPara {
+  color: red;
+}
+
+#profilePicture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.fa-solid {
+  color: rgb(125, 125, 4)
+}
