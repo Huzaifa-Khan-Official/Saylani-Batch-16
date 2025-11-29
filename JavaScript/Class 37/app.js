@@ -23,10 +23,10 @@
 // console.log("Me chala")
 
 
-fetch("https://jsonplaceholder.typicode.com/photdfsfos")
-  .then(data => data.json())
-  .then(response => console.log("response ==>", response[0].thumbnailUrl))
-  .catch(err => console.log("error ==>", err))
+// fetch("https://jsonplaceholder.typicode.com/photdfsfos")
+//   .then(data => data.json())
+//   .then(response => console.log("response ==>", response[0].thumbnailUrl))
+//   .catch(err => console.log("error ==>", err))
 
 
 
@@ -50,4 +50,27 @@ fetch("https://jsonplaceholder.typicode.com/photdfsfos")
 
 
 
-console.log("Me chala")
+// console.log("Me chala")
+
+const main = document.querySelector(".main");
+
+main.innerHTML = "Loading..."
+
+setTimeout(() => {
+  fetch("https://jsonplaceholder.typicode.com/posts")
+  .then(data => data.json())
+  .then(res => {
+    // console.log("res ==>", res);
+    main.innerHTML = ""
+    res.map(post => {
+      console.log("post ==>", post);
+      main.innerHTML += `
+      <div class="card">
+        <h1>${post.title}</h1>
+        <p>${post.body}</p>
+      </div>
+      `
+    })
+  })
+  .catch(err => main.innerHTML = "Something went wrong, Please try later!")
+}, 5000)
