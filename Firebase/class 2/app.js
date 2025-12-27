@@ -1,4 +1,6 @@
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js"
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js"
+import { db } from "./config.js";
 
 const user_uid = localStorage.getItem("user_uid");
 
@@ -19,6 +21,7 @@ onAuthStateChanged(auth, (user) => {
     userGreetingHeading.innerText = `Welcome, ${user.email}`
   } else {
     alert("Please Login to your account!")
+    location = "./auth.html"
   }
 });
 
@@ -35,3 +38,24 @@ const logoutUser = () => {
 const logoutBtn = document.getElementById("logoutBtn");
 
 logoutBtn.addEventListener("click", logoutUser)
+
+const newPostBtn = document.getElementById("newPostBtn");
+
+const createPost = async () => {
+  const postInp = document.getElementById("postInp");
+  newPostBtn.innerText = "Creating..."
+  try {
+    const docRef = await addDoc(collection(db, "posts"), {
+      user_uid,
+      data: postInp.value
+    });
+    console.log("Document written with ID: ", docRef.id);
+    postInp.value = "";
+    newPostBtn.innerText = "New Post"
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    newPostBtn.innerText = "New Post"
+  }
+}
+
+newPostBtn.addEventListener('click', createPost)

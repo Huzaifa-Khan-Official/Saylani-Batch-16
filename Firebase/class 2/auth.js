@@ -1,7 +1,8 @@
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 import { app } from "./config.js";
 
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 const signupBtn = document.getElementById("signupBtn");
 const loginBtn = document.getElementById("loginBtn");
@@ -37,30 +38,42 @@ const registerUser = async () => {
     alert("Password not matched!")
     return
   }
-
   console.log("signupEmail ==>", signupEmail);
   console.log("signupPassword ==>", signupPassword);
   console.log("signupName ==>", signupName);
+  try {
+    const user = await createUserWithEmailAndPassword(auth, signupEmail, signupPassword);
+    console.log("success ==>", user);
+
+    await sendEmailVerification(auth.currentUser);
+    alert("Please verify your email.");
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    console.log("error ==>", errorMessage);
+  }
 
 
-  createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
-    .then((userCredential) => {
-      // Signed up 
-      const user = userCredential.user;
 
-      console.log("success ==>", user);
+  // createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
+  //   .then((userCredential) => {
+  //     // Signed up 
+  //     const user = userCredential.user;
 
-      sendEmailVerification(auth.currentUser)
-        .then(() => {
-          alert("Please verify your email.")
-        });
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+  //     console.log("success ==>", user);
 
-      console.log("error ==>", errorMessage);
-    });
+  //     sendEmailVerification(auth.currentUser)
+  //       .then(() => {
+  //         alert("Please verify your email.")
+  //       });
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+
+  //     console.log("error ==>", errorMessage);
+  //   });
 }
 
 const loginUser = async () => {
@@ -88,8 +101,33 @@ const loginUser = async () => {
     });
 }
 
+const signupWithGoogle = () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+
+      console.log("success ==>", user);
+      localStorage.setItem("user_uid", user.uid);
+      location = "./index.html"
+
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.customData.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+
+      console.log("error ==>", errorMessage);
+    });
+}
+
 const signFunc = document.getElementById("signFunc")
 const loginUserBtn = document.getElementById("loginUserBtn")
+const googleBtn = document.getElementById("googleBtn")
+const googleLoginBtn = document.getElementById("googleLoginBtn")
 
 signFunc.addEventListener("click", registerUser)
 loginUserBtn.addEventListener("click", loginUser)
+googleBtn.addEventListener("click", signupWithGoogle)
+googleLoginBtn.addEventListener("click", signupWithGoogle)
