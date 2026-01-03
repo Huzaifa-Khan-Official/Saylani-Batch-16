@@ -1,5 +1,6 @@
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-import { app } from "./config.js";
+import { setDoc, doc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+import { app, db } from "./config.js";
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -44,6 +45,12 @@ const registerUser = async () => {
   try {
     const user = await createUserWithEmailAndPassword(auth, signupEmail, signupPassword);
     console.log("success ==>", user);
+
+    await setDoc(doc(db, "users", user.user.uid), {
+      name: signupName,
+      email: signupEmail,
+      password: signupPassword,
+    });
 
     await sendEmailVerification(auth.currentUser);
     alert("Please verify your email.");
