@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js"
-import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js"
+import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js"
 import { db } from "./config.js";
 
 const user_uid = localStorage.getItem("user_uid");
@@ -53,29 +53,75 @@ const card = document.querySelector(".card");
 const getPosts = async () => {
   card.innerText = "Loading..."
   const usersData = await getDocs(collection(db, "users")); // all users fetched
-  usersData.forEach(async (user) => {
-    card.innerHTML = "";
+  let allPostHtml = ""
+  for (const user of usersData.docs) {
     const postsData = await getDocs(collection(db, "users", user.id, "posts"))
     postsData.forEach(async (eachPost) => {
       if (eachPost.data().user_uid === user_uid) {
-        card.innerHTML += `
-        <p>
-          ${eachPost.data().data} 
+        allPostHtml += `
+        <div class="post-contianer flex gap-2" id="${eachPost.id}">
+          <p>${eachPost.data().data}</p>
           <div>
-              <button id="editBtn">Edit</button>
-              <button>Delete</button>
+          <button class="editBtn" data-user-id="${user_uid}" data-post-id="${eachPost.id}" data-post-content="${eachPost.data().data}">Edit</button>
+          <button class="deleteBtn" data-user-id="${user_uid}" data-post-id="${eachPost.id}" data-post-content="${eachPost.data().data}">Delete</button>
           </div>
-        </p>
-        `;
+        </div>
+        `
       } else {
-        card.innerHTML += `
-        <p class="">
-          ${eachPost.data().data} 
-        </p>
-        `;
+        allPostHtml += `
+        <div class="post-contianer">
+          <p>${eachPost.data().data}</p>
+        </div>
+        `
       }
     })
-  });
+  }
+
+
+  card.innerHTML = allPostHtml || "No posts Available"
+
+
+  document.querySelectorAll(".editBtn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const userId = btn.dataset.userId;
+      const postId = btn.dataset.postId;
+      const postContent = btn.dataset.postContent;
+
+      const updatedPost = prompt("Edit Post", postContent);
+
+      if (!updatedPost || updatedPost === postContent) {
+        alert("Can not update your post");
+        return
+      }
+      const postRef = doc(db, "users", userId, "posts", postId);
+
+      await updateDoc(postRef, {
+        data: updatedPost
+      });
+
+      document.querySelector(`.post-contianer[id='${postId}'] p`).textContent = updatedPost
+      alert("Post updated successfully!")
+    })
+  })
+
+  document.querySelectorAll(".deleteBtn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const userId = btn.dataset.userId;
+      const postId = btn.dataset.postId;
+      const postContent = btn.dataset.postContent;
+
+      const result = confirm(`Do you really want to delete this post? ${postContent}`);
+
+      console.log("result ==>", result)
+
+      if (result) {
+        await deleteDoc(doc(db, "users", userId, "posts", postId));
+
+        document.querySelector(`.post-contianer[id='${postId}']`).remove()
+        alert("Post deleted successfully!")
+      }
+    })
+  })
 }
 
 // get posts function call

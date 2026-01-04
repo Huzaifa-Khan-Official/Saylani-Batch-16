@@ -54,6 +54,7 @@ const registerUser = async () => {
 
     await sendEmailVerification(auth.currentUser);
     alert("Please verify your email.");
+    showLogin()
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
