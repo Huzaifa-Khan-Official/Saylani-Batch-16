@@ -13,7 +13,10 @@ export default function App() {
     onSnapshot(collection(db, "todos"), (querySnapshot) => {
       let todos = []
       querySnapshot.forEach((doc) => {
-        todos.push(doc.data())
+        todos.push({
+          ...doc.data(),
+          id: doc.id
+        })
       });
       todos.sort((a, b) => a.create_at - b.create_at)
       setData(todos)
@@ -21,16 +24,13 @@ export default function App() {
     });
   }, [])
 
-
-  console.log("data ==>", data);
-
   return (
     <div>
       <h1 className='text-xl font-bold underline'>
         Todo Website
       </h1>
 
-      <TodoInput />
+      <TodoInput  />
       <ListTodos loading={loading} data={data} />
     </div>
   )

@@ -14,7 +14,8 @@ export default function TodoInput() {
       const date = new Date();
       const docRef = await addDoc(collection(db, "todos"), {
         todo: value,
-        create_at: date.getTime()
+        created_at: date.getTime(),
+        updated_at: date.getTime()
       });
       console.log("Document written with ID: ", docRef.id);
       setValue("")
