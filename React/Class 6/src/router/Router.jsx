@@ -5,12 +5,15 @@ import Login from "../pages/Login";
 import DashboardLayout from "../pages/DashboardLayout";
 import About from "../pages/About";
 import AuthLayout from "../pages/AuthLayout";
+import ProtectedRoutes from "../loaders/ProtectedRoutes";
+import { LoginAction } from "../actions/LoginAction";
 // import Home from "../pages/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: DashboardLayout,
+    loader: ProtectedRoutes,
     children: [
       {
         index: true,
@@ -33,10 +36,11 @@ const router = createBrowserRouter([
       }
     ]
   },
-  // {
-  //   path: "/login",
-  //   element: <Login />
-  // }
+  {
+    path: "/login",
+    element: <Login />,
+    action: LoginAction
+  }
 ])
 
 function Router() {

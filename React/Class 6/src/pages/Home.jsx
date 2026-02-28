@@ -4,6 +4,7 @@ import TodoInput from '../components/TodoInput';
 import ListTodos from '../components/ListTodos';
 import { db } from '../config/firebase-config';
 import { Link } from 'react-router';
+import Counter from '../components/Counter';
 
 export default function Home() {
   const [data, setData] = useState([])
@@ -35,6 +36,7 @@ export default function Home() {
 
       <TodoInput  />
       <ListTodos loading={loading} data={data} />
+      <Counter/>
     </div>
   )
 }
