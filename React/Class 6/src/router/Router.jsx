@@ -7,6 +7,9 @@ import About from "../pages/About";
 import AuthLayout from "../pages/AuthLayout";
 import ProtectedRoutes from "../loaders/ProtectedRoutes";
 import { LoginAction } from "../actions/LoginAction";
+import UserReducer from "../hooks/UserReducer";
+import MemoComponent from "../hooks/MemoComponent";
+import UseMemo from "../hooks/UseMemo";
 // import Home from "../pages/Home";
 
 const router = createBrowserRouter([
@@ -40,7 +43,19 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     action: LoginAction
-  }
+  },
+  {
+    path: "/use-reducer",
+    Component: UserReducer
+  },
+  {
+    path: "/memo",
+    Component: MemoComponent
+  },
+  {
+    path: "/use-memo",
+    Component: UseMemo
+  },
 ])
 
 function Router() {
