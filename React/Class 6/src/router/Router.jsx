@@ -10,6 +10,7 @@ import { LoginAction } from "../actions/LoginAction";
 import UserReducer from "../hooks/UserReducer";
 import MemoComponent from "../hooks/MemoComponent";
 import UseMemo from "../hooks/UseMemo";
+import UseCallback from "../hooks/UseCallback";
 // import Home from "../pages/Home";
 
 const router = createBrowserRouter([
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
     path: "/use-memo",
     Component: UseMemo
   },
+  {
+    path: "/use-callback",
+    Component: UseCallback
+  }
 ])
 
 function Router() {

@@ -19,7 +19,7 @@ function TodosTable({ data, handleEdit }) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Todos ({data.length})</TableCell>
+            <TableCell>Todos ({data && data.length})</TableCell>
             <TableCell align="left">Name</TableCell>
             <TableCell align="left">Updaed At</TableCell>
             <TableCell align="left">Created AT</TableCell>
@@ -28,7 +28,7 @@ function TodosTable({ data, handleEdit }) {
         </TableHead>
         <TableBody>
           {
-            data.length === 0 && (
+            !data && (
               <TableRow>
                 <TableCell colSpan={5} align="center">
                   No todo found, craete your first todo
@@ -36,7 +36,7 @@ function TodosTable({ data, handleEdit }) {
               </TableRow>
             )
           }
-          {data.map((row, index) => (
+          {data && data.map((row, index) => (
             <TableRow
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
