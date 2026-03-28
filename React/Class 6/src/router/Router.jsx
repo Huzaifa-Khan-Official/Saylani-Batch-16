@@ -11,6 +11,8 @@ import UserReducer from "../hooks/UserReducer";
 import MemoComponent from "../hooks/MemoComponent";
 import UseMemo from "../hooks/UseMemo";
 import UseCallback from "../hooks/UseCallback";
+import ReduxComponent from "../components/ReduxComponent";
+import MotionComponent from "../components/MotionComponents/MotionComponent";
 // import Home from "../pages/Home";
 
 const router = createBrowserRouter([
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
   {
     path: "/use-callback",
     Component: UseCallback
+  },
+  {
+    path: "/redux-toolkit",
+    Component: ReduxComponent
+  },
+  {
+    path: "/motion",
+    Component: MotionComponent
   }
 ])
 

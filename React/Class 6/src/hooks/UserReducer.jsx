@@ -25,7 +25,7 @@ function UserReducer() {
       <h1>Count: {count}</h1>
       <div className="flex flex-col items-start">
         {/* <button onClick={() => setCount(count + 1)} className="bg-green-300"> */}
-        <button onClick={() => dispatch({ type: "ADD" })} className="bg-green-300">
+        <button onClick={() => dispatch(  )} className="bg-green-300">
           Increment
         </button>
         {/* <button onClick={() => setCount(count - 1)} className="bg-red-300"> */}
