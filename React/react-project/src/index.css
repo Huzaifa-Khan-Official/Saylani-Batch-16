@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.leftSide .ant-card-body {
+  padding: 20px 0;
+}
