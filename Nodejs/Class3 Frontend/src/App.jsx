@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router"
 
 const getAllProducts = async () => {
   try {
@@ -50,10 +51,10 @@ export default function App() {
       <h1>All Products</h1>
       {
         products && products.map((product) => (
-          <>
-          <h3>{product.name}</h3>
+          <div key={product.name}>
+          <a href={`/products/${product.price}`}>{product.name}</a>
           <p>{product.price}</p>
-          </>
+          </div>
         ))
       }
 
