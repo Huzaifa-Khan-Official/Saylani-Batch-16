@@ -1,9 +1,10 @@
 const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
-const dotenv = require("dotenv")
-
-dotenv.config()
+const { config } = require("dotenv")
+const configs = require("./configs/configs")
+const connectDB = require("./configs/dbConnect")
+const Users = require("./models/userModel")
 
 const app = express()
 const port = process.env.PORT
@@ -118,10 +119,18 @@ app.get("/users", (req, res) => {
 // Create user Endpoint
 app.post("/users", (req, res) => {
   const { productName, productPrice } = req.body;
-  products.push({
-    name: productName,
-    price: productPrice
+  // products.push({
+  //   name: productName,
+  //   price: productPrice
+  // })
+
+  const newUser = new Users({
+    fullName: productName
   })
+
+  newUser.save()
+  .then(() => console.log("user cerated successfully!", newUser))
+  .catch((error) => console.log("Error ==>", error))
 
   res.json({
     message: "Your product has been added",
@@ -150,6 +159,12 @@ app.get("/products/:price", (req, res) => {
   }
 })
 
-app.listen(port, () => {
-  console.log("Server is up and running on PORT: ", port);
+app.listen(configs.PORT, () => {
+  connectDB()
+  .then(() => console.log("Successfully connected to database"))
+  .catch((err) => {
+    console.error("Error connecting to database", err);
+    process.exit(1); // Exit the process with an error code
+  });
+  console.log("Server is up and running on PORT: ", configs.PORT);
 })
