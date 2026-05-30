@@ -43,10 +43,60 @@ const login = async (req, res) => {
       throw new Error("Invalid Credentials")
     }
 
-    successRes(res, 200, true, "Logged In successfully!", null)
+    // generating a secret token
+    console.log("user ==>", user);
+
+    const token = jwt.sign({
+      userName: user.userName,
+      email: user.email,
+      id: user._id
+    }, configs.JWT_SECRET)
+
+    console.log("token ==>", token);
+
+
+    successRes(res, 200, true, "Logged In successfully!", {
+      token
+    })
   } catch (error) {
     errorRes(res, 400, false, error.message || "Something went wrong, please try later!", null)
   }
 }
 
-export { registerUser, login }
+const getAllUsers = async (req, res) => {
+  try {
+
+    const allUsers = await Users.find()
+
+    successRes(res, 200, true, "All users fetched successfully!", allUsers)
+  } catch (error) {
+    errorRes(res, 400, false, error.message || "Something went wrong, please try later!", null)
+  }
+}
+
+const updateUserById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const { isActive } = req.body
+
+    const user = await Users.findById(id)
+
+    if (!user) throw new Error("No user found with this Id!");
+
+    console.log("isActive", isActive)
+
+    const updatedUser = await Users.findOneAndUpdate(
+      {_id: id},
+      { $set: { isActive } },
+      { new: true, runValidators: true }
+    );
+
+    console.log(updatedUser);
+
+    successRes(res, 200, true, "User updated successfully!", updatedUser)
+  } catch (error) {
+    errorRes(res, 400, false, error.message || "Something went wrong, please try later!", null)
+  }
+}
+
+export { registerUser, login, getAllUsers, updateUserById }

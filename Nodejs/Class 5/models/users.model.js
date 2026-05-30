@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: [6, "Password should not be less than 6 characters"]
+  },
+  isActive: {
+    type: Boolean
   }
 }, {timestamps: true})
 
