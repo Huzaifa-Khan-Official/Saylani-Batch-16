@@ -1,3 +1,4 @@
+import cloudinary from "../lib/cloudinary.js";
 import Todos from "../models/todos.model.js";
 
 const getAllTodos = async (req, res) => {
@@ -20,6 +21,15 @@ const getAllTodos = async (req, res) => {
 
 const createTodo = async (req, res) => {
   try {
+    const image = req.file
+    // console.log("image ===>", image);
+
+    const result = await cloudinary.uploader.upload(
+      `data:${image.mimetype};base64,${image.buffer.toString("base64")}`
+    );
+
+    // console.log(result);
+
     const { title, description } = req.body;
     if (!title || !description) {
       res.status(400).json({
@@ -28,7 +38,11 @@ const createTodo = async (req, res) => {
         data: null
       })
     }
-    const response = await Todos.create(req.body)
+    const response = await Todos.create({
+      title,
+      description,
+      image: result.secure_url
+    })
     res.status(200).json({
       status: true,
       message: "Todo created successfully!",
@@ -111,7 +125,7 @@ const deleteTodoByID = async (req, res) => {
     const response = await Todos.findByIdAndDelete(todoId)
 
     console.log("response ==>", response);
-    
+
     if (!response) {
       res.status(400).json({
         status: false,

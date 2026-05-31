@@ -1,7 +1,11 @@
 import express from "express"
 import { createTodo, getAllTodos, getTodoByID, updateTodoByID, deleteTodoByID } from "../controllers/todos.controller.js"
+import multer from "multer"
 
 const router = express.Router()
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
 
 // router.get("/", async (req, res) => {
 //   try {
@@ -32,10 +36,12 @@ const router = express.Router()
 //   }
 // })
 
+
+
 router
   .route("/")
   .get(getAllTodos)
-  .post(createTodo)
+  .post(upload.single('image'), createTodo)
 
 router
   .route("/:todoId") // /2, /3, /35

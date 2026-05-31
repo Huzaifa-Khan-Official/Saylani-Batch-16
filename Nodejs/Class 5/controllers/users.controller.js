@@ -4,24 +4,38 @@ import jwt from "jsonwebtoken"
 
 import bcrypt from "bcryptjs";
 import configs from "../configs/configs.js";
+import { generateOtp } from "../lib/generateOTP.js";
+import transporter from "../lib/mailTransporter.js";
 
 const registerUser = async (req, res) => {
   try {
     const { userName, email, password } = req.body;
 
     const salt = await bcrypt.genSalt(8)
+    const OTP = generateOtp()
 
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = await Users.create({
       userName,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      otp: OTP
     })
 
-    // res.status(200).json({  
-    // })
-    successRes(res, 200, true, "User created successfully!", null)
+
+    console.log("OTP ==>", OTP);
+
+    await transporter.sendMail({
+      from: configs.SMTP_USER,
+      to: email,
+      subject: "Hello", // subject line
+      // text: "Hello world?", // plain text body
+      html: "<h1>Hello world? Testing</h1>", // HTML body
+    })
+
+
+    successRes(res, 200, true, "User created successfully! Please verify your email!", null)
   } catch (error) {
     errorRes(res, 400, false, error.message || "Something went wrong, please try later!", null)
   }
@@ -86,7 +100,7 @@ const updateUserById = async (req, res) => {
     console.log("isActive", isActive)
 
     const updatedUser = await Users.findOneAndUpdate(
-      {_id: id},
+      { _id: id },
       { $set: { isActive } },
       { new: true, runValidators: true }
     );
