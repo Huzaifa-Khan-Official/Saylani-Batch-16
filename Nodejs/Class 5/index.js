@@ -23,3 +23,6 @@ app.use("/api/admin", adminRoutes)
 app.listen(configs.PORT, () => {
   console.log("Server is up and running on PORT: ", configs.PORT);
 })
+
+// Export the Express app
+export default app;
