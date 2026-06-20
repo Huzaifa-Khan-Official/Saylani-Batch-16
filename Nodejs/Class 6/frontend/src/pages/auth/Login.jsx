@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useInventory } from '../../context/InventoryContext';
 import { Input, Select } from '../../components/ui/FormInputs';
 import { FiLock, FiMail, FiUserCheck, FiPackage } from 'react-icons/fi';
+import api from '../../configs/axios';
 
 const Login = () => {
   const { login, currentUser } = useInventory();
@@ -21,7 +22,7 @@ const Login = () => {
     }
   }, [currentUser, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError('Please fill in all fields.');
@@ -30,17 +31,20 @@ const Login = () => {
 
     setLoading(true);
     setError('');
-
-    // Small delay to simulate auth network roundtrip
-    setTimeout(() => {
-      const res = login(email, password, role);
+    try {
+      const res = await login(email, password, role);
+      console.log("res ==>", res);
+      
       setLoading(false);
       if (res.success) {
+        console.log("In the res.success");
         navigate('/dashboard');
       } else {
         setError(res.message || 'Invalid credentials for chosen role.');
       }
-    }, 600);
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
   };
 
   // Helper to load quick test credentials

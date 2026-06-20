@@ -7,6 +7,8 @@ import {
   initialSales,
   initialUsers
 } from '../data/mockData';
+import axios from "axios";
+import api from '../configs/axios';
 
 const InventoryContext = createContext();
 
@@ -88,28 +90,31 @@ export const InventoryProvider = ({ children }) => {
   }, [currentUser]);
 
   // Auth actions
-  const login = (email, password, role) => {
-    const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.role === role);
-    if (found) {
-      if (found.status === 'Inactive') {
-        return { success: false, message: 'This account has been disabled. Contact an administrator.' };
-      }
-      setCurrentUser(found);
-      return { success: true };
-    } else {
+  const login = async (email, password, role) => {
+    try {
       // Create a dynamic profile for test credentials if they don't match exactly
-      const name = email.split('@')[0];
-      const newUser = {
-        id: 'u_' + Date.now(),
-        name: name.charAt(0).toUpperCase() + name.slice(1),
-        email: email,
-        role: role,
-        status: 'Active',
-        avatar: `https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80`
-      };
-      setUsers(prev => [...prev, newUser]);
-      setCurrentUser(newUser);
-      return { success: true };
+      // const name = email.split('@')[0];
+      // const newUser = {
+      //   id: 'u_' + Date.now(),
+      //   name: name.charAt(0).toUpperCase() + name.slice(1),
+      //   email: email,
+      //   role: role,
+      //   status: 'Active',
+      //   avatar: `https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80`
+      // };
+      // setUsers(prev => [...prev, newUser]);
+      // setCurrentUser(newUser);
+
+      const res = await api.post("/api/auth/login", {
+        email,
+        password
+      })
+
+      setCurrentUser(res.data.data.token);
+      return { success: true, res };
+    } catch (error) {
+      console.log("error ==>", error.message);
+
     }
   };
 
@@ -142,11 +147,11 @@ export const InventoryProvider = ({ children }) => {
       prev.map(p =>
         p.id === updatedProduct.id
           ? {
-              ...updatedProduct,
-              stock: Number(updatedProduct.stock),
-              price: Number(updatedProduct.price),
-              status: determineStatus(updatedProduct.stock)
-            }
+            ...updatedProduct,
+            stock: Number(updatedProduct.stock),
+            price: Number(updatedProduct.price),
+            status: determineStatus(updatedProduct.stock)
+          }
           : p
       )
     );
@@ -157,12 +162,14 @@ export const InventoryProvider = ({ children }) => {
   };
 
   // Categories CRUD
-  const addCategory = (categoryData) => {
-    const newCat = {
-      ...categoryData,
-      id: 'cat_' + Date.now()
-    };
-    setCategories(prev => [...prev, newCat]);
+  const addCategory = async (categoryData) => {
+    try {
+      const res = await api.post("/api/admin/categories", categoryData)
+
+      setCategories(prev => [...prev, newCat]);
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
   };
 
   const editCategory = (updatedCat) => {

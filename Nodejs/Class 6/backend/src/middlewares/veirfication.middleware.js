@@ -5,15 +5,11 @@ import { errorRes } from "../utils/responseHandler.js";
 
 const verifyUser = async (req, res, next) => {
   try {
-    const token = req.cookies.token.split("=")[0]
-  
-    if (!token) {
-      throw new Error("No Token Provided!")
-    }
+    console.log("token ==>", req.cookies.token);
     
-    const decoded = jwt.verify(token, configs.JWT_SECRET)
+    const token = req.cookies.token?.split("=")[0]    
 
-    console.log("decoded ==>", decoded);
+    const decoded = jwt.verify(token, configs.JWT_SECRET)
 
     const user = await Users.findById(decoded.id)
 
@@ -27,4 +23,16 @@ const verifyUser = async (req, res, next) => {
   }
 }
 
-export default verifyUser
+const verifyAdmin = async (req, res, next) => {
+  try {
+    const user = req.user
+    if (user.role !== "Admin") {
+      throw new Error("You are not authorized")
+    }
+    next()
+  } catch (error) {
+    errorRes(res, 400, false, error.message || "Something went wrong, please try later!", null)
+  }
+}
+
+export { verifyUser, verifyAdmin }

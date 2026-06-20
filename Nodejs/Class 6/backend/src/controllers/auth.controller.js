@@ -53,7 +53,7 @@ const verifyOTP = async (req, res) => {
     }
 
     if (existingUser.otp === OTP) {
-      await Users.findOneAndUpdate({ email: useremail }, {status: true});
+      await Users.findOneAndUpdate({ email: useremail }, { status: true });
       successRes(res, 200, true, "Your email has been verified successfully!", null)
     } else {
       throw new Error("Invalid OTP")
@@ -85,20 +85,24 @@ const login = async (req, res) => {
     }
 
     // generating a secret token
-    const token = jwt.sign({
-      name: user.name,
-      email: user.email,
-      id: user._id,
-      role: user.role
-    }, configs.JWT_SECRET)
+    const token = jwt.sign(
+      {
+        name: user.name,
+        email: user.email,
+        id: user._id,
+        role: user.role
+      },
+      configs.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
 
-    res.cookie('token', token, {
-        httpOnly: true,     // Prevents client-side JS from accessing the token (XSS protection)
-        secure: true,       // Ensures the cookie is only sent over HTTPS (enable in production)
-        sameSite: 'strict', // Protects against Cross-Site Request Forgery (CSRF)
-        // maxAge: 3600000     // Cookie expiration time in milliseconds (1 hour)
-        maxAge: 120000     // Cookie expiration time in milliseconds (2 minitues)
-    })
+    res.cookie("token", token, {
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === "production",
+      secure: false,
+      sameSite: "lax", // or "none" if frontend/backend are on different domains and using HTTPS
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
 
     successRes(res, 200, true, "Logged In successfully!", {
       token
