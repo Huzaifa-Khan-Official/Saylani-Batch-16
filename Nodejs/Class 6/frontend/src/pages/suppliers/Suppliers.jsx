@@ -15,7 +15,7 @@ const Suppliers = () => {
   const [editingSup, setEditingSup] = useState(null); // null means adding
 
   // Form State
-  const [form, setForm] = useState({ name: '', email: '', phone: '', address: '' });
+  const [form, setForm] = useState({ name: '', email: '', contact: '', address: '' });
   const [error, setError] = useState('');
 
   const handleOpenAdd = () => {
@@ -24,7 +24,7 @@ const Suppliers = () => {
       return;
     }
     setEditingSup(null);
-    setForm({ name: '', email: '', phone: '', address: '' });
+    setForm({ name: '', email: '', contact: '', address: '' });
     setError('');
     setModalOpen(true);
   };
@@ -35,38 +35,38 @@ const Suppliers = () => {
       return;
     }
     setEditingSup(sup);
-    setForm({ name: sup.name, email: sup.email, phone: sup.phone, address: sup.address });
+    setForm({ name: sup.name, email: sup.email, contact: sup.contact, address: sup.address });
     setError('');
     setModalOpen(true);
   };
 
   const handleDelete = (id, name) => {
+    console.log("id ==>", id);
+    
     if (currentUser?.role === 'Sales Person') {
       alert('Unauthorized action. Only Admin or Inventory Manager can manage suppliers.');
       return;
     }
 
-    const linkedProducts = products.filter(p => p.supplier === name).length;
-    if (linkedProducts > 0) {
-      alert(`Cannot delete supplier. there are ${linkedProducts} products supplied by "${name}". Re-assign those products to another supplier first.`);
-      return;
-    }
+    // const linkedProducts = products.filter(p => p.supplier === name).length;
+    // if (linkedProducts > 0) {
+    //   alert(`Cannot delete supplier. there are ${linkedProducts} products supplied by "${name}". Re-assign those products to another supplier first.`);
+    //   return;
+    // }
 
-    if (window.confirm(`Are you sure you want to delete supplier "${name}"?`)) {
-      deleteSupplier(id);
-    }
+    deleteSupplier(id);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
+    if (!form.name.trim() || !form.email.trim() || !form.contact.trim()) {
       setError('Please fill in all required fields.');
       return;
     }
 
     // Duplicate check
-    const isDuplicate = suppliers.some(
-      s => s.name.toLowerCase() === form.name.trim().toLowerCase() && (!editingSup || s.id !== editingSup.id)
+    const isDuplicate = suppliers && suppliers.some(
+      s => s.name.toLowerCase() === form.name.trim().toLowerCase() && (!editingSup || s._id !== editingSup._id)
     );
     if (isDuplicate) {
       setError('A supplier with this name already exists.');
@@ -81,10 +81,10 @@ const Suppliers = () => {
     setModalOpen(false);
   };
 
-  const filteredSuppliers = suppliers.filter(s => 
+  const filteredSuppliers = suppliers.filter(s =>
     s.name.toLowerCase().includes(search.toLowerCase()) ||
     s.email.toLowerCase().includes(search.toLowerCase()) ||
-    s.phone.includes(search)
+    (s.contact && s.contact.includes(search))
   );
 
   const columns = [
@@ -93,7 +93,7 @@ const Suppliers = () => {
       key: 'name',
       render: (row) => (
         <div>
-          <Link to={`/suppliers/${row.id}`} className="font-semibold text-slate-800 hover:text-indigo-600 transition-colors">
+          <Link to={`/suppliers/${row._id}`} className="font-semibold text-slate-800 hover:text-indigo-600 transition-colors">
             {row.name}
           </Link>
         </div>
@@ -104,8 +104,8 @@ const Suppliers = () => {
       key: 'email',
     },
     {
-      header: 'Phone Number',
-      key: 'phone',
+      header: 'Contact Number',
+      key: 'contact',
     },
     {
       header: 'Physical Address',
@@ -122,7 +122,7 @@ const Suppliers = () => {
       render: (row) => (
         <div className="flex space-x-2">
           <Link
-            to={`/suppliers/${row.id}`}
+            to={`/suppliers/${row._id}`}
             title="View Details"
             className="p-1.5 bg-slate-50 text-slate-500 hover:text-indigo-600 border border-slate-200 rounded-lg hover:bg-indigo-50 transition-colors active:scale-95"
           >
@@ -138,7 +138,7 @@ const Suppliers = () => {
                 <FiEdit className="w-4 h-4" />
               </button>
               <button
-                onClick={() => handleDelete(row.id, row.name)}
+                onClick={() => handleDelete(row._id, row.name)}
                 title="Delete Supplier"
                 className="p-1.5 bg-slate-50 text-slate-500 hover:text-rose-600 border border-slate-200 rounded-lg hover:bg-rose-50 transition-colors active:scale-95"
               >
@@ -230,12 +230,12 @@ const Suppliers = () => {
           />
 
           <Input
-            label="Contact Phone"
-            id="sup-phone"
+            label="Contact Number"
+            id="sup-contact"
             type="tel"
             placeholder="1-800-555-0199"
-            value={form.phone}
-            onChange={(e) => setForm(prev => ({ ...prev, phone: e.target.value }))}
+            value={form.contact}
+            onChange={(e) => setForm(prev => ({ ...prev, contact: e.target.value }))}
             required
           />
 

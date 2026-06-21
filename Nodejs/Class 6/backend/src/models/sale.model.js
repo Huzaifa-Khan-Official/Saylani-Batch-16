@@ -25,6 +25,11 @@ const saleSchema = new Schema(
       required: true,
       min: 0,
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "Users",
+      required: true,
+    },
   },
   {
     timestamps: true,

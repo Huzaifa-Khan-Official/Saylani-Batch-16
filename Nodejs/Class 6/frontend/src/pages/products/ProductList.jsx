@@ -177,7 +177,7 @@ const ProductList = () => {
             >
               <option value="">All Categories</option>
               {categories.map(c => (
-                <option key={c.id} value={c.name}>{c.name}</option>
+                <option key={c._id || c.id} value={c.name}>{c.name}</option>
               ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
@@ -194,7 +194,7 @@ const ProductList = () => {
             >
               <option value="">All Suppliers</option>
               {suppliers.map(s => (
-                <option key={s.id} value={s.name}>{s.name}</option>
+                <option key={s._id || s.id} value={s.name}>{s.name}</option>
               ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">

@@ -42,6 +42,9 @@ const Categories = () => {
 
   // Handle delete
   const handleDelete = (id, name) => {
+
+    console.log("id ==>", id);
+    
     if (currentUser?.role === 'Sales Person') {
       alert('Unauthorized action. Only Admin or Inventory Manager can manage categories.');
       return;
@@ -68,8 +71,8 @@ const Categories = () => {
     }
 
     // Check for duplicate name
-    const isDuplicate = categories.some(
-      c => c.name.toLowerCase() === form.name.trim().toLowerCase() && (!editingCat || c.id !== editingCat.id)
+    const isDuplicate = categories && categories.some(
+      c => c.name.toLowerCase() === form.name.trim().toLowerCase() && (!editingCat || (c._id || c.id) !== (editingCat._id || editingCat.id))
     );
     if (isDuplicate) {
       setError('A category with this name already exists.');
@@ -85,7 +88,7 @@ const Categories = () => {
   };
 
   // Filter categories
-  const filteredCategories = categories.filter(c => 
+  const filteredCategories = categories && categories.filter(c =>
     c.name.toLowerCase().includes(search.toLowerCase()) ||
     (c.description && c.description.toLowerCase().includes(search.toLowerCase()))
   );
@@ -109,7 +112,7 @@ const Categories = () => {
       header: 'Description',
       key: 'description',
       render: (row) => (
-        <span className="text-xs text-slate-500 max-w-[280px] block truncate" title={row.description}>
+        <span className="text-xs text-slate-500 max-w-70 block truncate" title={row.description}>
           {row.description || 'No description provided.'}
         </span>
       )
@@ -120,9 +123,8 @@ const Categories = () => {
       render: (row) => {
         const count = products.filter(p => p.category === row.name).length;
         return (
-          <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-            count > 0 ? 'bg-indigo-50 text-indigo-700' : 'bg-slate-50 text-slate-500'
-          }`}>
+          <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${count > 0 ? 'bg-indigo-50 text-indigo-700' : 'bg-slate-50 text-slate-500'
+            }`}>
             {count} products
           </span>
         );
@@ -141,7 +143,7 @@ const Categories = () => {
             <FiEdit className="w-4 h-4" />
           </button>
           <button
-            onClick={() => handleDelete(row.id, row.name)}
+            onClick={() => handleDelete(row._id, row.name)}
             title="Delete Category"
             className="p-1.5 bg-slate-50 text-slate-500 hover:text-rose-600 border border-slate-200 rounded-lg hover:bg-rose-50 transition-colors active:scale-95"
           >

@@ -4,10 +4,12 @@ dotenv.config()
 
 const configs = {
   PORT: process.env.PORT,
+  BASE_URL: process.env.BASE_URL,
   MONGODB_URI: process.env.MONGODB_URI,
   SMTP_USER: process.env.SMTP_USER,
   SMTP_PASS: process.env.SMTP_PASS,
   JWT_SECRET: process.env.JWT_SECRET,
+  COOKIES_SECRET: process.env.COOKIES_SECRET,
 }
 
 export default configs

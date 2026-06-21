@@ -11,7 +11,7 @@ const app = express()
 
 
 const corsOptions = {
-  origin: 'http://localhost:5173', // Only allow this domain
+  origin: configs.BASE_URL, // Only allow this domain
   optionsSuccessStatus: 200,          // For legacy browser compatibility (IE11)
   credentials: true,
 };
@@ -19,7 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json())
-app.use(cookieParser('your-secret-key'));
+app.use(cookieParser(configs.COOKIES_SECRET));
 
 await connectDB()
 

@@ -1,8 +1,16 @@
 import React from 'react';
-import { chartSalesData, chartPurchasesData } from '../../data/mockData';
+import { useInventory } from '../../context/InventoryContext';
 
 export const SalesLineChart = () => {
-  const data = chartSalesData;
+  const { salesTrend } = useInventory();
+  const data = salesTrend && salesTrend.length > 0 ? salesTrend : [
+    { month: 'Jan', amount: 0 },
+    { month: 'Feb', amount: 0 },
+    { month: 'Mar', amount: 0 },
+    { month: 'Apr', amount: 0 },
+    { month: 'May', amount: 0 },
+    { month: 'Jun', amount: 0 }
+  ];
   const maxVal = Math.max(...data.map(d => d.amount));
   
   // Calculate SVG dimensions
@@ -128,7 +136,15 @@ export const SalesLineChart = () => {
 };
 
 export const PurchasesBarChart = () => {
-  const data = chartPurchasesData;
+  const { purchasesTrend } = useInventory();
+  const data = purchasesTrend && purchasesTrend.length > 0 ? purchasesTrend : [
+    { month: 'Jan', amount: 0 },
+    { month: 'Feb', amount: 0 },
+    { month: 'Mar', amount: 0 },
+    { month: 'Apr', amount: 0 },
+    { month: 'May', amount: 0 },
+    { month: 'Jun', amount: 0 }
+  ];
   const maxVal = Math.max(...data.map(d => d.amount));
 
   const width = 500;

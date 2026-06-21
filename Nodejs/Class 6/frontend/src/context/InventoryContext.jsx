@@ -12,6 +12,90 @@ import api from '../configs/axios';
 
 const InventoryContext = createContext();
 
+// Fetched all categories
+const fetchCategories = async () => {
+  try {
+    const res = await api.get("/api/admin/categories");
+    return res.data.data
+  } catch (error) {
+    console.log("error ==>", error.message);
+  }
+}
+
+// Fetched all suppliers
+const fetchSuppliers = async () => {
+  try {
+    const res = await api.get("/api/admin/suppliers");
+    return res.data.data
+  } catch (error) {
+    console.log("error ==>", error.message);
+  }
+}
+
+// Fetched all products
+const fetchProducts = async () => {
+  try {
+    const res = await api.get("/api/admin/products");
+    return res.data.data
+  } catch (error) {
+    console.log("error ==>", error.message);
+  }
+}
+
+// Fetched all purchases
+const fetchPurchases = async () => {
+  try {
+    const res = await api.get("/api/admin/purchases");
+    return res.data.data
+  } catch (error) {
+    console.log("error ==>", error.message);
+  }
+}
+
+const mapProduct = (p) => ({
+  ...p,
+  id: p._id,
+  category: p.category?.name || p.category || '',
+  supplier: p.supplier?.name || p.supplier || ''
+});
+
+const mapPurchase = (pur) => ({
+  ...pur,
+  id: pur._id,
+  productId: pur.productId?._id || pur.productId,
+  productName: pur.productId?.name || 'Unknown Product',
+  supplier: pur.supplier?.name || 'Unknown Supplier',
+  date: pur.createdAt ? pur.createdAt.split('T')[0] : (pur.date || new Date().toISOString().split('T')[0])
+});
+
+// Fetched all sales
+const fetchSales = async () => {
+  try {
+    const res = await api.get("/api/admin/sales");
+    return res.data.data
+  } catch (error) {
+    console.log("error ==>", error.message);
+  }
+}
+
+// Fetched dashboard overview
+const fetchDashboardOverview = async () => {
+  try {
+    const res = await api.get("/api/admin/dashboard");
+    return res.data.data
+  } catch (error) {
+    console.log("error ==>", error.message);
+  }
+}
+
+const mapSale = (s) => ({
+  ...s,
+  id: s._id,
+  productId: s.productId?._id || s.productId,
+  productName: s.productId?.name || 'Unknown Product',
+  date: s.createdAt ? s.createdAt.split('T')[0] : (s.date || new Date().toISOString().split('T')[0])
+});
+
 export const useInventory = () => {
   const context = useContext(InventoryContext);
   if (!context) {
@@ -26,56 +110,106 @@ export const InventoryProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const [products, setProducts] = useState(() => {
-    const saved = localStorage.getItem('ims_products');
-    return saved ? JSON.parse(saved) : initialProducts;
-  });
+  const [products, setProducts] = useState([]);
 
+  // const [categories, setCategories] = useState(async () => {
+  //   // const saved = localStorage.getItem('ims_categories');
+  //   // if (saved) return JSON.parse(saved);
+
+  //   const data = await fetchCategories()
+
+  //   return data
+  // });
   const [categories, setCategories] = useState(() => {
     const saved = localStorage.getItem('ims_categories');
-    return saved ? JSON.parse(saved) : initialCategories;
+    if (!saved) return [];
+    try {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   });
 
   const [suppliers, setSuppliers] = useState(() => {
     const saved = localStorage.getItem('ims_suppliers');
-    return saved ? JSON.parse(saved) : initialSuppliers;
+    if (!saved) return [];
+    try {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   });
 
-  const [purchases, setPurchases] = useState(() => {
-    const saved = localStorage.getItem('ims_purchases');
-    return saved ? JSON.parse(saved) : initialPurchases;
-  });
+  const [purchases, setPurchases] = useState([]);
 
-  const [sales, setSales] = useState(() => {
-    const saved = localStorage.getItem('ims_sales');
-    return saved ? JSON.parse(saved) : initialSales;
-  });
+  const [sales, setSales] = useState([]);
+  const [salesTrend, setSalesTrend] = useState([]);
+  const [purchasesTrend, setPurchasesTrend] = useState([]);
 
   const [users, setUsers] = useState(() => {
     const saved = localStorage.getItem('ims_users');
     return saved ? JSON.parse(saved) : initialUsers;
   });
 
-  // Sync to localStorage
   useEffect(() => {
-    localStorage.setItem('ims_products', JSON.stringify(products));
-  }, [products]);
-
-  useEffect(() => {
-    localStorage.setItem('ims_categories', JSON.stringify(categories));
-  }, [categories]);
-
-  useEffect(() => {
-    localStorage.setItem('ims_suppliers', JSON.stringify(suppliers));
-  }, [suppliers]);
-
-  useEffect(() => {
-    localStorage.setItem('ims_purchases', JSON.stringify(purchases));
-  }, [purchases]);
-
-  useEffect(() => {
-    localStorage.setItem('ims_sales', JSON.stringify(sales));
-  }, [sales]);
+    if (!currentUser) {
+      setCategories([]);
+      setSuppliers([]);
+      setProducts([]);
+      setPurchases([]);
+      setSales([]);
+      setSalesTrend([]);
+      setPurchasesTrend([]);
+      return;
+    }
+    (
+      async () => {
+        const data = await fetchCategories()
+        setCategories(data || [])
+      }
+    )();
+    (
+      async () => {
+        const data = await fetchSuppliers()
+        setSuppliers(data || [])
+      }
+    )();
+    (
+      async () => {
+        const data = await fetchProducts()
+        if (data) {
+          setProducts(data.map(mapProduct))
+        }
+      }
+    )();
+    (
+      async () => {
+        const data = await fetchPurchases()
+        if (data) {
+          setPurchases(data.map(mapPurchase))
+        }
+      }
+    )();
+    (
+      async () => {
+        const data = await fetchSales()
+        if (data) {
+          setSales(data.map(mapSale))
+        }
+      }
+    )();
+    (
+      async () => {
+        const data = await fetchDashboardOverview()
+        if (data) {
+          setSalesTrend(data.salesTrend || [])
+          setPurchasesTrend(data.purchasesTrend || [])
+        }
+      }
+    )();
+  }, [currentUser]);
 
   useEffect(() => {
     localStorage.setItem('ims_users', JSON.stringify(users));
@@ -131,145 +265,178 @@ export const InventoryProvider = ({ children }) => {
   };
 
   // Products CRUD
-  const addProduct = (productData) => {
-    const newProduct = {
-      ...productData,
-      id: 'p_' + Date.now(),
-      stock: Number(productData.stock),
-      price: Number(productData.price),
-      status: determineStatus(productData.stock)
-    };
-    setProducts(prev => [newProduct, ...prev]);
-  };
-
-  const editProduct = (updatedProduct) => {
-    setProducts(prev =>
-      prev.map(p =>
-        p.id === updatedProduct.id
-          ? {
-            ...updatedProduct,
-            stock: Number(updatedProduct.stock),
-            price: Number(updatedProduct.price),
-            status: determineStatus(updatedProduct.stock)
-          }
-          : p
-      )
-    );
-  };
-
-  const deleteProduct = (id) => {
-    setProducts(prev => prev.filter(p => p.id !== id));
-  };
-
-  // Categories CRUD
-  const addCategory = async (categoryData) => {
+  const addProduct = async (productData) => {
     try {
-      const res = await api.post("/api/admin/categories", categoryData)
-
-      setCategories(prev => [...prev, newCat]);
+      const res = await api.post("/api/admin/products", productData);
+      const payload = res?.data?.data;
+      if (payload) {
+        setProducts((prev) => [mapProduct(payload), ...prev]);
+      }
     } catch (error) {
       console.log("error ==>", error.message);
     }
   };
 
-  const editCategory = (updatedCat) => {
-    setCategories(prev => prev.map(c => (c.id === updatedCat.id ? updatedCat : c)));
+  const editProduct = async (updatedProduct) => {
+    try {
+      const id = updatedProduct._id || updatedProduct.id;
+      const res = await api.put(`/api/admin/products/${id}`, updatedProduct);
+      const payload = res?.data?.data;
+      if (payload) {
+        setProducts((prev) =>
+          prev.map((p) => (p.id === id ? mapProduct(payload) : p))
+        );
+      }
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
   };
 
-  const deleteCategory = (id) => {
-    setCategories(prev => prev.filter(c => c.id !== id));
+  const deleteProduct = async (id) => {
+    try {
+      const res = await api.delete(`/api/admin/products/${id}`);
+      if (res.data.status) {
+        setProducts((prev) => prev.filter((p) => p.id !== id && p._id !== id));
+      }
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
+  };
+
+  // Categories CRUD
+  const addCategory = async (categoryData) => {
+    try {
+      const res = await api.post("/api/admin/categories", categoryData);
+
+      // Backend can return either an array or a single category object.
+      const payload = res?.data?.data;
+
+      setCategories((prev) => {
+        if (Array.isArray(payload)) return payload;
+        if (payload && typeof payload === 'object') return [...prev, payload];
+        return prev;
+      });
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
+  };
+
+  const editCategory = async (updatedCat) => {    
+    const res = await api.put(`/api/admin/categories/${updatedCat._id}`, {
+      name: updatedCat.name,
+      description: updatedCat.description
+    })
+    setCategories(prev => prev.map(c => (c._id === updatedCat._id ? updatedCat : c)));
+  };
+
+  const deleteCategory = async (id) => {
+    const res = await api.delete(`/api/admin/categories/${id}`)
+
+    console.log("res ==>", res.data);
+    if (res.data.status) {
+      setCategories(prev => prev.filter(c => c._id !== id));
+    } else {
+
+    }
   };
 
   // Suppliers CRUD
-  const addSupplier = (supplierData) => {
-    const newSup = {
-      ...supplierData,
-      id: 'sup_' + Date.now()
-    };
-    setSuppliers(prev => [...prev, newSup]);
+  const addSupplier = async (supplierData) => {
+    try {
+      const res = await api.post("/api/admin/suppliers", supplierData);
+      const payload = res?.data?.data;
+      setSuppliers((prev) => {
+        if (Array.isArray(payload)) return payload;
+        if (payload && typeof payload === 'object') return [...prev, payload];
+        return prev;
+      });
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
   };
 
-  const editSupplier = (updatedSup) => {
-    setSuppliers(prev => prev.map(s => (s.id === updatedSup.id ? updatedSup : s)));
+  const editSupplier = async (updatedSup) => {
+    try {      
+      const res = await api.put(`/api/admin/suppliers/${updatedSup._id}`, {
+        name: updatedSup.name,
+        email: updatedSup.email,
+        contact: updatedSup.contact,
+        address: updatedSup.address
+      });
+      setSuppliers(prev => prev.map(s => (s._id === updatedSup._id ? updatedSup : s)));
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
   };
 
-  const deleteSupplier = (id) => {
-    setSuppliers(prev => prev.filter(s => s.id !== id));
+  const deleteSupplier = async (id) => {
+    try {
+      console.log("id in delete Supplier ===>", id);
+      
+      const res = await api.delete(`/api/admin/suppliers/${id}`);
+      console.log("res ==>", res.data);
+      
+      if (res.data.status) {
+        setSuppliers(prev => prev.filter(s => s._id !== id));
+      }
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
   };
 
   // Purchase CRUD & Stock Update
-  const addPurchase = (purchaseData) => {
-    const newPurchase = {
-      ...purchaseData,
-      id: 'PUR-' + String(Date.now()).slice(-6),
-      quantity: Number(purchaseData.quantity),
-      price: Number(purchaseData.price),
-      total: Number(purchaseData.quantity) * Number(purchaseData.price),
-      date: purchaseData.date || new Date().toISOString().split('T')[0]
-    };
+  const addPurchase = async (purchaseData) => {
+    try {
+      const res = await api.post("/api/admin/purchases", purchaseData);
+      const payload = res?.data?.data;
+      if (payload) {
+        setPurchases((prev) => [mapPurchase(payload), ...prev]);
 
-    setPurchases(prev => [newPurchase, ...prev]);
-
-    // Update Product Stock
-    setProducts(prevProducts =>
-      prevProducts.map(p => {
-        if (p.id === purchaseData.productId) {
-          const newStock = p.stock + newPurchase.quantity;
-          return {
-            ...p,
-            stock: newStock,
-            status: determineStatus(newStock)
-          };
+        // Re-fetch products to ensure stock/status is fully synced with database!
+        const prodRes = await api.get("/api/admin/products");
+        if (prodRes?.data?.data) {
+          setProducts(prodRes.data.data.map(mapProduct));
         }
-        return p;
-      })
-    );
+
+        // Re-fetch dashboard trend data
+        const dashData = await fetchDashboardOverview();
+        if (dashData) {
+          setSalesTrend(dashData.salesTrend || []);
+          setPurchasesTrend(dashData.purchasesTrend || []);
+        }
+      }
+    } catch (error) {
+      console.log("error ==>", error.message);
+    }
   };
 
   // Sale CRUD & Stock Update
-  const addSale = (saleData) => {
-    const targetProduct = products.find(p => p.id === saleData.productId);
-    const saleQty = Number(saleData.quantity);
+  const addSale = async (saleData) => {
+    try {
+      const res = await api.post("/api/admin/sales", saleData);
+      const payload = res?.data?.data;
+      if (payload) {
+        setSales((prev) => [mapSale(payload), ...prev]);
 
-    if (!targetProduct) {
-      return { success: false, message: 'Product not found.' };
-    }
-
-    if (targetProduct.stock < saleQty) {
-      return {
-        success: false,
-        message: `Insufficient stock. Current available stock for ${targetProduct.name} is ${targetProduct.stock}.`
-      };
-    }
-
-    const newSale = {
-      ...saleData,
-      id: 'SAL-' + String(Date.now()).slice(-6),
-      productName: targetProduct.name,
-      quantity: saleQty,
-      price: Number(saleData.price),
-      total: saleQty * Number(saleData.price),
-      date: saleData.date || new Date().toISOString().split('T')[0]
-    };
-
-    setSales(prev => [newSale, ...prev]);
-
-    // Update Product Stock
-    setProducts(prevProducts =>
-      prevProducts.map(p => {
-        if (p.id === saleData.productId) {
-          const newStock = p.stock - saleQty;
-          return {
-            ...p,
-            stock: newStock,
-            status: determineStatus(newStock)
-          };
+        // Re-fetch products to ensure stock/status is fully synced with database!
+        const prodRes = await api.get("/api/admin/products");
+        if (prodRes?.data?.data) {
+          setProducts(prodRes.data.data.map(mapProduct));
         }
-        return p;
-      })
-    );
 
-    return { success: true };
+        // Re-fetch dashboard trend data
+        const dashData = await fetchDashboardOverview();
+        if (dashData) {
+          setSalesTrend(dashData.salesTrend || []);
+          setPurchasesTrend(dashData.purchasesTrend || []);
+        }
+        return { success: true };
+      }
+      return { success: false, message: 'Failed to record sale.' };
+    } catch (error) {
+      console.log("error ==>", error.message);
+      return { success: false, message: error.response?.data?.message || error.message || 'Something went wrong.' };
+    }
   };
 
   // User CRUD
@@ -335,7 +502,9 @@ export const InventoryProvider = ({ children }) => {
         addUser,
         editUser,
         deleteUser,
-        updateProfile
+        updateProfile,
+        salesTrend,
+        purchasesTrend
       }}
     >
       {children}

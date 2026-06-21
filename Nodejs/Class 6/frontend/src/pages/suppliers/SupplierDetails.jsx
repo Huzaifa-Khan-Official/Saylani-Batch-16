@@ -7,7 +7,7 @@ const SupplierDetails = () => {
   const { id } = useParams();
   const { suppliers, products, purchases } = useInventory();
 
-  const supplier = suppliers.find(s => s.id === id);
+  const supplier = suppliers && suppliers.find(s => s._id === id);
 
   if (!supplier) {
     return (
@@ -64,9 +64,9 @@ const SupplierDetails = () => {
               <div className="flex items-start">
                 <FiPhone className="w-4 h-4 text-indigo-500 mr-2.5 mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-slate-400 font-medium">Phone Number</p>
-                  <a href={`tel:${supplier.phone}`} className="font-semibold text-slate-700 hover:text-indigo-600 mt-0.5 block">
-                    {supplier.phone}
+                  <p className="text-slate-400 font-medium">Contact Number</p>
+                  <a href={`tel:${supplier.contact || supplier.phone}`} className="font-semibold text-slate-700 hover:text-indigo-600 mt-0.5 block">
+                    {supplier.contact || supplier.phone}
                   </a>
                 </div>
               </div>

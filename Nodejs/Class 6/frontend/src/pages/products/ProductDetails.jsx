@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const supplierInfo = suppliers.find(s => s.name === product.supplier) || {
     name: product.supplier,
     email: 'N/A',
-    phone: 'N/A',
+    contact: 'N/A',
     address: 'N/A'
   };
 
@@ -130,8 +130,8 @@ const ProductDetails = () => {
                 <p className="text-slate-700 mt-0.5">{supplierInfo.email}</p>
               </div>
               <div>
-                <p className="text-slate-400 font-medium">Phone number</p>
-                <p className="text-slate-700 mt-0.5">{supplierInfo.phone}</p>
+                <p className="text-slate-400 font-medium">Contact number</p>
+                <p className="text-slate-700 mt-0.5">{supplierInfo.contact || supplierInfo.phone}</p>
               </div>
               <div>
                 <p className="text-slate-400 font-medium">Business Address</p>
