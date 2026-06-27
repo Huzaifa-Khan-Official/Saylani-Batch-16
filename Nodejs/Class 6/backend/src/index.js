@@ -32,3 +32,6 @@ app.use("/api/admin", verifyUser, verifyAdmin, adminRoutes)
 app.listen(configs.PORT, () => {
   console.log("Your server is up and running on PORT: ", configs.PORT);
 })
+
+// Export the Express app for deployment
+export default app;
