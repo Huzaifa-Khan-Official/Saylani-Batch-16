@@ -29,9 +29,11 @@ app.use("/api/auth", authRoutes)
 // Admin related APIs
 app.use("/api/admin", verifyUser, verifyAdmin, adminRoutes)
 
-app.listen(configs.PORT, () => {
-  console.log("Your server is up and running on PORT: ", configs.PORT);
-})
+if (process.env.NODE_ENV !== "production") {
+  app.listen(configs.PORT, () => {
+    console.log(`Server running on ${configs.PORT}`);
+  });
+}
 
 // Export the Express app for deployment
 export default app;
