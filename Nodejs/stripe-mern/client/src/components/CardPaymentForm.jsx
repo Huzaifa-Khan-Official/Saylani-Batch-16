@@ -52,7 +52,7 @@ export default function CardPaymentForm({ cart, onSuccess }) {
       if (stripeError) {
         setError(stripeError.message);
       } else if (paymentIntent.status === "succeeded") {
-        onSuccess({ orderId: data.orderId, email: form.email });
+        onSuccess({ orderId: data.orderId, email: form.email });        
       }
     } catch (err) {
       setError(err.response?.data?.error || "Payment failed. Try again.");

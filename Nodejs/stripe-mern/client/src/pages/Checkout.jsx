@@ -7,7 +7,7 @@ export default function Checkout() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const cart = state?.cart || [];
-  const [tab, setTab] = useState("card");
+  const [tab, setTab] = useState("card"); // custom card / stripe hosted integration
   const [hostedForm, setHostedForm] = useState({ name: "", email: "" });
   const [hostedLoading, setHostedLoading] = useState(false);
   const [hostedError, setHostedError] = useState(null);
