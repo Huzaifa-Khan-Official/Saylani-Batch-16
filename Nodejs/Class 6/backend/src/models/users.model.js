@@ -16,9 +16,6 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Please enter your password"],    
   },
-  otp: {
-    type: String
-  },
   role: {
     type: String,
     enum: ['Admin', 'Inventory Manager', "Sales Person"],

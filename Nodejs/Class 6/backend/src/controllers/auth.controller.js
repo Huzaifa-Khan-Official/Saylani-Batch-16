@@ -5,6 +5,8 @@ import Users from "../models/users.model.js";
 import { errorRes, successRes } from "../utils/responseHandler.js";
 import transporter from "../utils/mailTransporter.js";
 import configs from "../configs/configs.js";
+import { redis } from "../configs/redis.js";
+import { emailQueue } from "../queues/emailQueue.js";
 
 
 const registerUser = async (req, res) => {
@@ -14,24 +16,25 @@ const registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(8)
     const OTP = generateOtp()
 
+    await redis.set(
+      `otp:${email}`,
+      OTP,
+      "EX",
+      300
+    )
+
     const hashedPassword = await bcrypt.hash(password, salt);
 
     await Users.create({
       name,
       email,
       password: hashedPassword,
-      otp: OTP,
-      role: "Admin"
     })
 
-    await transporter.sendMail({
-      from: configs.SMTP_USER,
-      to: email,
-      subject: "Hello", // subject line
-      // text: "Hello world?", // plain text body
-      html: `<h1>Your OTP: ${OTP}</h1>`, // HTML body
+    await emailQueue.add("send-otp", {
+      email,
+      OTP
     })
-
 
     successRes(res, 200, true, "User created successfully! Please verify your email!", null)
   } catch (error) {
