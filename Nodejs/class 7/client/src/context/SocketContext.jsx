@@ -16,8 +16,8 @@ export function SocketProvider({ children }) {
     const token = getToken();
     const socket = io(import.meta.env.VITE_SOCKET_URL, {
       auth: { token },
-      reconnectionAttempts: 5,
-      reconnectionDelay: 1000,
+      reconnectionAttempts: 5, // try 5 times to build connection
+      reconnectionDelay: 1000, // try after every 1sec
     });
 
     socketRef.current = socket;

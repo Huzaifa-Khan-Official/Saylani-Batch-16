@@ -1,0 +1,67 @@
+what is socket?
+whatsapp uses real time communication
+browser have its native protocol "WebSocket"
+http: request =>   <= response, connection close
+WebSocket: request => connection built 
+
+socketIO is built on top of WebSocket, its a library
+
+server: server was created using express, 
+
+
+client connectd
+server remembers connection
+new notification
+server pushes notification
+client instantly receives
+
+client: {io} from  socket.io-client
+socket = io(serverURL)
+
+how we push the notification
+socket.emit("var1")
+
+socket.on("var3", () => {custom logic ...})
+
+
+for disconnecting the socket:
+	socket.on("disconnect", () => {})
+
+
+
+
+
+
+
+servre: Server from "socket.io"
+
+app = express()
+httpServer = http.createServer(app)
+io = new Server(httpServer, options?)
+
+for connection building
+io.on("connection", (socket) => {
+console.log("Socket connected"
+
+	socket.on("var1", () => { custom logic ...})
+
+
+	socket.emit("var3")
+
+	
+	for disconnecting the socket:
+	socket.on("disconnect", () => {})
+})
+
+
+
+frontend: tailwindcss, react/nextjs, antd, typescript, matrialUI, gsap, shadcn, axios, 
+
+backend: express, cors, mongoose, jsonwebtokken, bcrypt, multer, nodemailer, socketIO, cloudinary/imagekit, morgan, nodemon, dotenv, 
+
+
+AI IDE: devin(windsurf), cursor, codexIDE, antigravityIDE, 
+
+AI extensions: blackbox, codex, windsurf, copilot, gemini, kilo, 
+
+
